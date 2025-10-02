@@ -1,10 +1,11 @@
-# import torch
 
-# s=torch.load('PAC-dataset/metamon_models/medium-rl/ckpts/policy_weights/policy_epoch_40.pt', map_location='cpu')
 
-# print(s.keys())
+import modal
+from pathlib import Path # Add this import
+from omegaconf import OmegaConf 
+# ... other imports
 
-import torch
+# --- Define the paths once at the top ---
+HOME_DIR = Path.home()/"Pokemon-Challenge-track1"
 
-state_dict= torch.load('model_weights.pt', map_location='cpu')
-print(state_dict.keys())
+print(HOME_DIR)

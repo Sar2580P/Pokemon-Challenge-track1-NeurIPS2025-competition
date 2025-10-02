@@ -7,7 +7,7 @@
 # Name of the Python script to execute
 PYTHON_SCRIPT="custom/gen9/evaluate.py"
 
-AGENT="SmallRLGen9Beta"           #"HRM_gen9ou_ABRA"
+AGENT="HRM_gen9ou_ABRA"           #"HRM_gen9ou_ABRA"
 EVAL_TYPE="pokeagent"    # Choices: "heuristic", "il", "ladder", "pokeagent"
 GENS="9"
 FORMATS="ou"
@@ -15,7 +15,7 @@ TOTAL_BATTLES=50
 TEAM_SET="competitive"
 AVATAR="lucas"
 
-CHECKPOINTS=18          #    "results/HRM_Pokemon_Gen9/ckpts/policy_weights/policy_epoch_0.pt"
+CHECKPOINTS="results/HRM_Pokemon_Gen9/ckpts/policy_weights/policy_epoch_0.pt"
 
 BATTLE_BACKEND="metamon"    # Choices: "poke-env", "metamon"
 SAVE_TRAJECTORIES_TO="eval_replays"
