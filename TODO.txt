@@ -1,0 +1,42 @@
+- understand the various battle formats ✅
+- understand various baseline models used...  ✅
+- Try using pre-trained models for better modelling (maybe try using HRM model) 
+
+- Think how opponent modelling and other available information like ELO rating and other stuff be used.
+- Think how and where HRM be integrated as actor... as it searches for various dfs like paths
+- How Traj Encoder be modified ... to improve or inject conditional vectors.
+- How the pre-trained components be used (ckpts available) to accelerate the learning  
+- How can usage_stats and team-modelling be done... using available dataset.   ✅
+
+
+- Lets proceed with below assumptions for Traj Encoder -->
+    - Just one zH,zL instead of several for multiple steps...   ✅
+    - Just a replace of current TrajEncoder with HRM based traj encoder...   ✅
+    - copy the training part and load checkpoints ...   ✅
+    - Do alignment of HRM wrt Transformer based TrajEncoder before connecting it to Actor-Critic   ✅
+        - Relational Knowledge Distillation (FitNets-style):  
+            - compute the Gram matrix for both teacher and student feature vectors within a batch. 
+            - The Gram matrix G(Z) captures the inner products between all pairs of feature maps.
+    - Implement the attention based module for interction between zH, x ... 
+        - apply some sort of attention on past zH at different game steps (currently assuming single zH can be suffice to go with)
+    - align the forward pass of HRM knowledge distillation wrt TformerTrajEncoder
+    - search for common alignment between the HRM training and this metamon based training... 
+    - complete all the components of HRM and seek for places of improvements.
+    - fill in numbers and configs rather than just simple random placeholders
+
+
+- The train steps not changing by varying batch-batch_size  ✅
+- Need to make ckpt commit to the volume   ✅
+- Just understand the dataloader stuff in the code (why such discrepancies)    ✅
+
+- Understand the self-play code, like how would it be organized
+- Create a separate setup for Gen-9, Gen1 ... See both run  ✅
+- Initialize different models for different gen1,9 using pretrained...✅
+
+- Design for opponent modelling
+- Putting reward for accounting that I don't reveal my all the pokemons too early... (it could be ratio of information revealed on both sides)
+- Design for team modelling
+- Look for population based RL training ⚠️
+- Set the gen1 training and improve the config (for both-> gen1,9)
+- Create the inference script for submission using custom model in Pokemon
+- 

@@ -1,0 +1,618 @@
+PAC-dataset/teams/competitive/gen1ou
+Laddering for 1 battles
+  Turn    2. | [●●●●●●][333/333hp]       jynx -    starmie [ 58%hp][●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> jynx noitem noability ice psychic noeffect par <move> blizzard ice special <move> lovelykiss normal status <move> psychic psychic special <move> rest psychic status <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> rhydon noitem noability <moveset> bodyslam earthquake substitute tailwhip <switch> snorlax noitem noability <moveset> bodyslam hyperbeam reflect rest <switch> starmie noitem noability <moveset> recover surf thunderbolt thunderwave <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <opponent> starmie unknownitem noability psychic water noeffect frz <conditions> noweather noconditions noconditions <player_prev> blizzard <opp_prev> thunderwave',
+      dtype='<U766'), 'numbers': array([1.        , 1.        , 1.        , 0.19607843, 0.37254903,
+       0.13725491, 0.37254903, 0.37254903, 0.25490198, 0.        ,
+       0.        , 0.        , 0.        , 0.        , 0.        ,
+       0.        , 0.6       , 0.9       , 0.        , 0.        ,
+       0.75      , 0.        , 0.45      , 1.        , 0.        ,
+       0.        , 1.        , 0.        , 1.        , 1.        ,
+       1.        , 1.        , 1.        , 0.58      , 1.        ,
+       0.29411766, 0.39215687, 0.33333334, 0.39215687, 0.4509804 ,
+       0.23529412, 0.        , 0.        , 0.        , 0.        ,
+       0.        , 0.        , 0.        ], dtype=float32)}
+__________________________________________________
+0.42000000000000004  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4, 5, 6, 7, 8]} 
+
+
+  Turn    3. | [●●●●●●][333/333hp]       jynx -    snorlax [100%hp][●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> jynx noitem noability ice psychic noeffect par <move> blizzard ice special <move> lovelykiss normal status <move> psychic psychic special <move> rest psychic status <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> rhydon noitem noability <moveset> bodyslam earthquake substitute tailwhip <switch> snorlax noitem noability <moveset> bodyslam hyperbeam reflect rest <switch> starmie noitem noability <moveset> recover surf thunderbolt thunderwave <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <opponent> snorlax unknownitem noability normal notype noeffect nostatus <conditions> noweather noconditions noconditions <player_prev> blizzard <opp_prev> nomove',
+      dtype='<U766'), 'numbers': array([1.        , 1.        , 1.        , 0.19607843, 0.37254903,
+       0.13725491, 0.37254903, 0.37254903, 0.25490198, 0.        ,
+       0.        , 0.        , 0.        , 0.        , 0.        ,
+       0.        , 0.6       , 0.9       , 0.        , 0.        ,
+       0.75      , 0.        , 0.45      , 1.        , 0.        ,
+       0.        , 1.        , 0.        , 1.        , 1.        ,
+       1.        , 1.        , 1.        , 1.        , 1.        ,
+       0.43137255, 0.25490198, 0.25490198, 0.25490198, 0.11764706,
+       0.627451  , 0.        , 0.        , 0.        , 0.        ,
+       0.        , 0.        , 0.        ], dtype=float32)}
+__________________________________________________
+0.0  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4, 5, 6, 7, 8]} 
+
+
+  Turn    4. | [●●●●●●][157/333hp]       jynx -    snorlax [100%hp][●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> jynx noitem noability ice psychic noeffect par <move> blizzard ice special <move> lovelykiss normal status <move> psychic psychic special <move> rest psychic status <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> rhydon noitem noability <moveset> bodyslam earthquake substitute tailwhip <switch> snorlax noitem noability <moveset> bodyslam hyperbeam reflect rest <switch> starmie noitem noability <moveset> recover surf thunderbolt thunderwave <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <opponent> snorlax unknownitem noability normal notype noeffect nostatus <conditions> noweather noconditions noconditions <player_prev> blizzard <opp_prev> bodyslam',
+      dtype='<U768'), 'numbers': array([1.        , 0.47147146, 1.        , 0.19607843, 0.37254903,
+       0.13725491, 0.37254903, 0.37254903, 0.25490198, 0.        ,
+       0.        , 0.        , 0.        , 0.        , 0.        ,
+       0.        , 0.6       , 0.9       , 0.        , 0.        ,
+       0.75      , 0.        , 0.45      , 1.        , 0.        ,
+       0.        , 1.        , 0.        , 1.        , 1.        ,
+       1.        , 1.        , 1.        , 1.        , 1.        ,
+       0.43137255, 0.25490198, 0.25490198, 0.25490198, 0.11764706,
+       0.627451  , 0.        , 0.        , 0.        , 0.        ,
+       0.        , 0.        , 0.        ], dtype=float32)}
+__________________________________________________
+-0.5285285285285286  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4, 5, 6, 7, 8]} 
+
+
+  Turn    4. | [⦻●●●●●][  0/333hp]       jynx -    snorlax [100%hp][●●]next-obs ==> {'text': array('<gen1ou> <forcedswitch> <player> jynx noitem noability ice psychic noeffect fnt <move> blizzard ice special <move> lovelykiss normal status <move> psychic psychic special <move> rest psychic status <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> rhydon noitem noability <moveset> bodyslam earthquake substitute tailwhip <switch> snorlax noitem noability <moveset> bodyslam hyperbeam reflect rest <switch> starmie noitem noability <moveset> recover surf thunderbolt thunderwave <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <opponent> snorlax unknownitem noability normal notype noeffect nostatus <conditions> noweather noconditions noconditions <player_prev> blizzard <opp_prev> bodyslam',
+      dtype='<U771'), 'numbers': array([1.        , 0.        , 1.        , 0.19607843, 0.37254903,
+       0.13725491, 0.37254903, 0.37254903, 0.25490198, 0.        ,
+       0.        , 0.        , 0.        , 0.        , 0.        ,
+       0.        , 0.6       , 0.9       , 0.        , 0.        ,
+       0.75      , 0.        , 0.45      , 1.        , 0.        ,
+       0.        , 1.        , 0.        , 1.        , 1.        ,
+       1.        , 1.        , 1.        , 1.        , 1.        ,
+       0.43137255, 0.25490198, 0.25490198, 0.25490198, 0.11764706,
+       0.627451  , 0.        , 0.        , 0.        , 0.        ,
+       0.        , 0.        , 0.        ], dtype=float32)}
+__________________________________________________
+-0.47147147147147145  |  False  |  False   |  {'legal_actions': [4, 5, 6, 7, 8]} 
+
+
+  Turn    5. | [⦻●●●●●][413/413hp]     rhydon -    snorlax [100%hp][●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> rhydon noitem noability ground rock noeffect nostatus <move> bodyslam normal physical <move> earthquake ground physical <move> substitute normal status <move> tailwhip normal status <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> snorlax noitem noability <moveset> bodyslam hyperbeam reflect rest <switch> starmie noitem noability <moveset> recover surf thunderbolt thunderwave <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> snorlax unknownitem noability normal notype noeffect nostatus <conditions> noweather noconditions noconditions <player_prev> nomove <opp_prev> bodyslam',
+      dtype='<U773'), 'numbers': array([ 1.        ,  1.        ,  1.        ,  0.50980395,  0.1764706 ,
+        0.47058824,  0.1764706 ,  0.15686275,  0.4117647 ,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.425     ,  1.        ,  0.        ,  0.5       ,
+        1.        ,  0.        ,  0.        ,  1.        ,  0.        ,
+        0.        ,  1.        ,  0.        ,  1.        ,  1.        ,
+        1.        ,  1.        , -2.        ,  1.        ,  1.        ,
+        0.43137255,  0.25490198,  0.25490198,  0.25490198,  0.11764706,
+        0.627451  ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+-1.0  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4, 5, 6, 7]} 
+
+
+  Turn    6. | [⦻●●●●●][310/413hp]     rhydon -    snorlax [100%hp][●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> rhydon noitem noability ground rock substitute nostatus <move> bodyslam normal physical <move> earthquake ground physical <move> substitute normal status <move> tailwhip normal status <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> snorlax noitem noability <moveset> bodyslam hyperbeam reflect rest <switch> starmie noitem noability <moveset> recover surf thunderbolt thunderwave <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> snorlax unknownitem noability normal notype reflect nostatus <conditions> noweather noconditions noconditions <player_prev> substitute <opp_prev> reflect',
+      dtype='<U777'), 'numbers': array([ 1.        ,  0.75060534,  1.        ,  0.50980395,  0.1764706 ,
+        0.47058824,  0.1764706 ,  0.15686275,  0.4117647 ,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.425     ,  1.        ,  0.        ,  0.5       ,
+        1.        ,  0.        ,  0.        ,  1.        ,  0.        ,
+        0.        ,  1.        ,  0.        ,  1.        ,  1.        ,
+        1.        ,  1.        , -2.        ,  1.        ,  1.        ,
+        0.43137255,  0.25490198,  0.25490198,  0.25490198,  0.11764706,
+        0.627451  ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+-0.24939467312348673  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4, 5, 6, 7]} 
+
+
+  Turn    7. | [⦻●●●●●][310/413hp]     rhydon -    snorlax [ 91%hp][●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> rhydon noitem noability ground rock noeffect nostatus <move> bodyslam normal physical <move> earthquake ground physical <move> substitute normal status <move> tailwhip normal status <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> snorlax noitem noability <moveset> bodyslam hyperbeam reflect rest <switch> starmie noitem noability <moveset> recover surf thunderbolt thunderwave <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> snorlax unknownitem noability normal notype reflect nostatus <conditions> noweather noconditions noconditions <player_prev> bodyslam <opp_prev> earthquake',
+      dtype='<U776'), 'numbers': array([ 1.        ,  0.75060534,  1.        ,  0.50980395,  0.1764706 ,
+        0.47058824,  0.1764706 ,  0.15686275,  0.4117647 ,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.425     ,  1.        ,  0.        ,  0.5       ,
+        1.        ,  0.        ,  0.        ,  1.        ,  0.        ,
+        0.        ,  1.        ,  0.        ,  1.        ,  1.        ,
+        1.        ,  1.        , -2.        ,  0.91      ,  1.        ,
+        0.43137255,  0.25490198,  0.25490198,  0.25490198,  0.11764706,
+        0.627451  ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+0.08999999999999997  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4, 5, 6, 7]} 
+
+
+  Turn    8. | [⦻●●●●●][ 16/413hp]     rhydon -    snorlax [ 80%hp][●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> rhydon noitem noability ground rock noeffect nostatus <move> bodyslam normal physical <move> earthquake ground physical <move> substitute normal status <move> tailwhip normal status <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> snorlax noitem noability <moveset> bodyslam hyperbeam reflect rest <switch> starmie noitem noability <moveset> recover surf thunderbolt thunderwave <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> snorlax unknownitem noability normal notype reflect nostatus <conditions> noweather noconditions noconditions <player_prev> bodyslam <opp_prev> earthquake',
+      dtype='<U776'), 'numbers': array([ 1.        ,  0.03874092,  1.        ,  0.50980395,  0.1764706 ,
+        0.47058824,  0.1764706 ,  0.15686275,  0.4117647 ,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.425     ,  1.        ,  0.        ,  0.5       ,
+        1.        ,  0.        ,  0.        ,  1.        ,  0.        ,
+        0.        ,  1.        ,  0.        ,  1.        ,  1.        ,
+        1.        ,  1.        , -2.        ,  0.8       ,  1.        ,
+        0.43137255,  0.25490198,  0.25490198,  0.25490198,  0.11764706,
+        0.627451  ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+-0.601864406779661  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4, 5, 6, 7]} 
+
+
+  Turn    9. | [⦻●●●●●][ 16/413hp]     rhydon -      golem [100%hp][●●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> rhydon noitem noability ground rock noeffect nostatus <move> bodyslam normal physical <move> earthquake ground physical <move> substitute normal status <move> tailwhip normal status <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> snorlax noitem noability <moveset> bodyslam hyperbeam reflect rest <switch> starmie noitem noability <moveset> recover surf thunderbolt thunderwave <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> golem unknownitem noability ground rock noeffect nostatus <conditions> noweather noconditions noconditions <player_prev> tailwhip <opp_prev> nomove',
+      dtype='<U769'), 'numbers': array([ 1.        ,  0.03874092,  1.        ,  0.50980395,  0.1764706 ,
+        0.47058824,  0.1764706 ,  0.15686275,  0.4117647 ,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.425     ,  1.        ,  0.        ,  0.5       ,
+        1.        ,  0.        ,  0.        ,  1.        ,  0.        ,
+        0.        ,  1.        ,  0.        ,  1.        ,  1.        ,
+        1.        ,  1.        , -2.        ,  1.        ,  1.        ,
+        0.43137255,  0.21568628,  0.50980395,  0.21568628,  0.1764706 ,
+        0.3137255 ,  0.        ,  0.        , -0.16666667,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+0.0  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4, 5, 6, 7]} 
+
+
+  Turn    9. | [⦻●⦻●●●][  0/413hp]     rhydon -      golem [100%hp][●●●]next-obs ==> {'text': array('<gen1ou> <forcedswitch> <player> rhydon noitem noability ground rock noeffect fnt <move> bodyslam normal physical <move> earthquake ground physical <move> substitute normal status <move> tailwhip normal status <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> snorlax noitem noability <moveset> bodyslam hyperbeam reflect rest <switch> starmie noitem noability <moveset> recover surf thunderbolt thunderwave <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> golem unknownitem noability ground rock noeffect nostatus <conditions> noweather noconditions noconditions <player_prev> tailwhip <opp_prev> rockslide',
+      dtype='<U770'), 'numbers': array([ 1.        ,  0.        ,  1.        ,  0.50980395,  0.1764706 ,
+        0.47058824,  0.1764706 ,  0.15686275,  0.4117647 ,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.425     ,  1.        ,  0.        ,  0.5       ,
+        1.        ,  0.        ,  0.        ,  1.        ,  0.        ,
+        0.        ,  1.        ,  0.        ,  1.        ,  1.        ,
+        1.        ,  1.        , -2.        ,  1.        ,  1.        ,
+        0.43137255,  0.21568628,  0.50980395,  0.21568628,  0.1764706 ,
+        0.3137255 ,  0.        ,  0.        , -0.16666667,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+-0.5387409200968523  |  False  |  False   |  {'legal_actions': [4, 5, 6, 7]} 
+
+
+  Turn   10. | [⦻●⦻●●●][323/323hp]    starmie -      golem [100%hp][●●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> starmie noitem noability psychic water noeffect nostatus <move> recover normal status <move> surf water special <move> thunderbolt electric special <move> thunderwave electric status <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> snorlax noitem noability <moveset> bodyslam hyperbeam reflect rest <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> golem unknownitem noability ground rock noeffect nostatus <conditions> noweather noconditions noconditions <player_prev> nomove <opp_prev> rockslide',
+      dtype='<U763'), 'numbers': array([ 1.        ,  1.        ,  1.        ,  0.29411766,  0.39215687,
+        0.33333334,  0.39215687,  0.4509804 ,  0.23529412,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  1.        ,  0.        ,  0.475     ,
+        1.        ,  0.        ,  0.475     ,  1.        ,  0.        ,
+        0.        ,  1.        ,  0.        ,  1.        ,  1.        ,
+        1.        , -2.        , -2.        ,  1.        ,  1.        ,
+        0.43137255,  0.21568628,  0.50980395,  0.21568628,  0.1764706 ,
+        0.3137255 ,  0.        ,  0.        , -0.16666667,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+-1.0  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4, 5, 6]} 
+
+
+  Turn   11. | [⦻●⦻●●●][323/323hp]    starmie -    chansey [100%hp][●●●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> starmie noitem noability psychic water noeffect nostatus <move> recover normal status <move> surf water special <move> thunderbolt electric special <move> thunderwave electric status <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> snorlax noitem noability <moveset> bodyslam hyperbeam reflect rest <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> chansey unknownitem noability normal notype noeffect nostatus <conditions> noweather noconditions noconditions <player_prev> recover <opp_prev> nomove',
+      dtype='<U765'), 'numbers': array([ 1.        ,  1.        ,  1.        ,  0.29411766,  0.39215687,
+        0.33333334,  0.39215687,  0.4509804 ,  0.23529412,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  1.        ,  0.        ,  0.475     ,
+        1.        ,  0.        ,  0.475     ,  1.        ,  0.        ,
+        0.        ,  1.        ,  0.        ,  1.        ,  1.        ,
+        1.        , -2.        , -2.        ,  1.        ,  1.        ,
+        0.01960784,  0.4117647 ,  0.01960784,  0.4117647 ,  0.19607843,
+        0.98039216,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+0.0  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4, 5, 6]} 
+
+
+  Turn   12. | [⦻●⦻●●●][323/323hp]    starmie -    chansey [ 91%hp][●●●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> starmie noitem noability psychic water noeffect par <move> recover normal status <move> surf water special <move> thunderbolt electric special <move> thunderwave electric status <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> snorlax noitem noability <moveset> bodyslam hyperbeam reflect rest <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> chansey unknownitem noability normal notype noeffect par <conditions> noweather noconditions noconditions <player_prev> thunderbolt <opp_prev> thunderwave',
+      dtype='<U764'), 'numbers': array([ 1.        ,  1.        ,  1.        ,  0.29411766,  0.39215687,
+        0.33333334,  0.39215687,  0.4509804 ,  0.23529412,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  1.        ,  0.        ,  0.475     ,
+        1.        ,  0.        ,  0.475     ,  1.        ,  0.        ,
+        0.        ,  1.        ,  0.        ,  1.        ,  1.        ,
+        1.        , -2.        , -2.        ,  0.91      ,  1.        ,
+        0.01960784,  0.4117647 ,  0.01960784,  0.4117647 ,  0.19607843,
+        0.98039216,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+0.08999999999999997  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4, 5, 6]} 
+
+
+  Turn   13. | [⦻●⦻●●●][286/323hp]    starmie -    chansey [ 91%hp][●●●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> starmie noitem noability psychic water noeffect par <move> recover normal status <move> surf water special <move> thunderbolt electric special <move> thunderwave electric status <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> snorlax noitem noability <moveset> bodyslam hyperbeam reflect rest <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> chansey unknownitem noability normal notype noeffect par <conditions> noweather noconditions noconditions <player_prev> recover <opp_prev> icebeam',
+      dtype='<U756'), 'numbers': array([ 1.        ,  0.88544893,  1.        ,  0.29411766,  0.39215687,
+        0.33333334,  0.39215687,  0.4509804 ,  0.23529412,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  1.        ,  0.        ,  0.475     ,
+        1.        ,  0.        ,  0.475     ,  1.        ,  0.        ,
+        0.        ,  1.        ,  0.        ,  1.        ,  1.        ,
+        1.        , -2.        , -2.        ,  0.91      ,  1.        ,
+        0.01960784,  0.4117647 ,  0.01960784,  0.4117647 ,  0.19607843,
+        0.98039216,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+-0.11455108359133126  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4, 5, 6]} 
+
+
+  Turn   14. | [⦻●⦻●●●][250/323hp]    starmie -    chansey [ 91%hp][●●●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> starmie noitem noability psychic water noeffect par <move> recover normal status <move> surf water special <move> thunderbolt electric special <move> thunderwave electric status <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> snorlax noitem noability <moveset> bodyslam hyperbeam reflect rest <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> chansey unknownitem noability normal notype noeffect par <conditions> noweather noconditions noconditions <player_prev> thunderwave <opp_prev> icebeam',
+      dtype='<U760'), 'numbers': array([ 1.        ,  0.7739938 ,  1.        ,  0.29411766,  0.39215687,
+        0.33333334,  0.39215687,  0.4509804 ,  0.23529412,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  1.        ,  0.        ,  0.475     ,
+        1.        ,  0.        ,  0.475     ,  1.        ,  0.        ,
+        0.        ,  1.        ,  0.        ,  1.        ,  1.        ,
+        1.        , -2.        , -2.        ,  0.91      ,  1.        ,
+        0.01960784,  0.4117647 ,  0.01960784,  0.4117647 ,  0.19607843,
+        0.98039216,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+-0.11145510835913308  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4, 5, 6]} 
+
+
+  Turn   15. | [⦻●⦻●●●][211/323hp]    starmie -    chansey [ 91%hp][●●●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> starmie noitem noability psychic water noeffect par <move> recover normal status <move> surf water special <move> thunderbolt electric special <move> thunderwave electric status <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> snorlax noitem noability <moveset> bodyslam hyperbeam reflect rest <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> chansey unknownitem noability normal notype noeffect par <conditions> noweather noconditions noconditions <player_prev> thunderwave <opp_prev> icebeam',
+      dtype='<U760'), 'numbers': array([ 1.        ,  0.65325075,  1.        ,  0.29411766,  0.39215687,
+        0.33333334,  0.39215687,  0.4509804 ,  0.23529412,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  1.        ,  0.        ,  0.475     ,
+        1.        ,  0.        ,  0.475     ,  1.        ,  0.        ,
+        0.        ,  1.        ,  0.        ,  1.        ,  1.        ,
+        1.        , -2.        , -2.        ,  0.91      ,  1.        ,
+        0.01960784,  0.4117647 ,  0.01960784,  0.4117647 ,  0.19607843,
+        0.98039216,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+-0.12074303405572762  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4, 5, 6]} 
+
+
+  Turn   16. | [⦻●⦻●●●][ 51/323hp]    starmie -    chansey [ 91%hp][●●●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> starmie noitem noability psychic water noeffect par <move> recover normal status <move> surf water special <move> thunderbolt electric special <move> thunderwave electric status <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> snorlax noitem noability <moveset> bodyslam hyperbeam reflect rest <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> chansey unknownitem noability normal notype noeffect par <conditions> noweather noconditions noconditions <player_prev> thunderwave <opp_prev> thunderbolt',
+      dtype='<U764'), 'numbers': array([ 1.        ,  0.15789473,  1.        ,  0.29411766,  0.39215687,
+        0.33333334,  0.39215687,  0.4509804 ,  0.23529412,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  1.        ,  0.        ,  0.475     ,
+        1.        ,  0.        ,  0.475     ,  1.        ,  0.        ,
+        0.        ,  1.        ,  0.        ,  1.        ,  1.        ,
+        1.        , -2.        , -2.        ,  0.91      ,  1.        ,
+        0.01960784,  0.4117647 ,  0.01960784,  0.4117647 ,  0.19607843,
+        0.98039216,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+-0.4953560371517028  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4, 5, 6]} 
+
+
+  Turn   17. | [⦻●⦻●●●][ 13/323hp]    starmie -    chansey [ 91%hp][●●●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> starmie noitem noability psychic water noeffect par <move> recover normal status <move> surf water special <move> thunderbolt electric special <move> thunderwave electric status <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> snorlax noitem noability <moveset> bodyslam hyperbeam reflect rest <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> chansey unknownitem noability normal notype noeffect par <conditions> noweather noconditions noconditions <player_prev> thunderwave <opp_prev> icebeam',
+      dtype='<U760'), 'numbers': array([ 1.        ,  0.04024768,  1.        ,  0.29411766,  0.39215687,
+        0.33333334,  0.39215687,  0.4509804 ,  0.23529412,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  1.        ,  0.        ,  0.475     ,
+        1.        ,  0.        ,  0.475     ,  1.        ,  0.        ,
+        0.        ,  1.        ,  0.        ,  1.        ,  1.        ,
+        1.        , -2.        , -2.        ,  0.91      ,  1.        ,
+        0.01960784,  0.4117647 ,  0.01960784,  0.4117647 ,  0.19607843,
+        0.98039216,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+-0.11764705882352941  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4, 5, 6]} 
+
+
+  Turn   17. | [⦻⦻⦻●●●][  0/323hp]    starmie -    chansey [ 91%hp][●●●●]next-obs ==> {'text': array('<gen1ou> <forcedswitch> <player> starmie noitem noability psychic water noeffect fnt <move> recover normal status <move> surf water special <move> thunderbolt electric special <move> thunderwave electric status <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> snorlax noitem noability <moveset> bodyslam hyperbeam reflect rest <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> chansey unknownitem noability normal notype noeffect par <conditions> noweather noconditions noconditions <player_prev> thunderwave <opp_prev> thunderbolt',
+      dtype='<U767'), 'numbers': array([ 1.        ,  0.        ,  1.        ,  0.29411766,  0.39215687,
+        0.33333334,  0.39215687,  0.4509804 ,  0.23529412,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  1.        ,  0.        ,  0.475     ,
+        1.        ,  0.        ,  0.475     ,  1.        ,  0.        ,
+        0.        ,  1.        ,  0.        ,  1.        ,  1.        ,
+        1.        , -2.        , -2.        ,  0.91      ,  1.        ,
+        0.01960784,  0.4117647 ,  0.01960784,  0.4117647 ,  0.19607843,
+        0.98039216,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+-0.04024767801857585  |  False  |  False   |  {'legal_actions': [4, 5, 6]} 
+
+
+  Turn   18. | [⦻⦻⦻●●●][353/353hp]     tauros -    chansey [ 91%hp][●●●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> tauros noitem noability normal notype noeffect nostatus <move> blizzard ice special <move> bodyslam normal physical <move> earthquake ground physical <move> hyperbeam normal physical <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> snorlax noitem noability <moveset> bodyslam hyperbeam reflect rest <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> chansey unknownitem noability normal notype noeffect par <conditions> noweather noconditions noconditions <player_prev> nomove <opp_prev> thunderbolt',
+      dtype='<U755'), 'numbers': array([ 1.        ,  1.        ,  1.        ,  0.39215687,  0.27450982,
+        0.37254903,  0.27450982,  0.43137255,  0.29411766,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.6       ,  0.9       ,  0.        ,  0.425     ,
+        1.        ,  0.        ,  0.5       ,  1.        ,  0.        ,
+        0.75      ,  0.9       ,  0.        ,  1.        ,  1.        ,
+       -2.        , -2.        , -2.        ,  0.91      ,  1.        ,
+        0.01960784,  0.4117647 ,  0.01960784,  0.4117647 ,  0.19607843,
+        0.98039216,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+-1.0  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4, 5]} 
+
+
+  Turn   19. | [⦻⦻⦻●●●][523/523hp]    snorlax -    chansey [ 91%hp][●●●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> snorlax noitem noability normal notype noeffect nostatus <move> bodyslam normal physical <move> hyperbeam normal physical <move> reflect psychic status <move> rest psychic status <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> chansey unknownitem noability normal notype noeffect par <conditions> noweather noconditions noconditions <player_prev> nomove <opp_prev> thunderbolt',
+      dtype='<U757'), 'numbers': array([ 1.        ,  1.        ,  1.        ,  0.43137255,  0.25490198,
+        0.25490198,  0.25490198,  0.11764706,  0.627451  ,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.425     ,  1.        ,  0.        ,  0.75      ,
+        0.9       ,  0.        ,  0.        ,  1.        ,  0.        ,
+        0.        ,  1.        ,  0.        ,  1.        ,  1.        ,
+       -2.        , -2.        , -2.        ,  0.91      ,  1.        ,
+        0.01960784,  0.4117647 ,  0.01960784,  0.4117647 ,  0.19607843,
+        0.98039216,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+0.0  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4, 5]} 
+
+
+  Turn   20. | [⦻⦻⦻●●●][523/523hp]    snorlax -    snorlax [ 30%hp][●●●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> snorlax noitem noability normal notype noeffect nostatus <move> bodyslam normal physical <move> hyperbeam normal physical <move> reflect psychic status <move> rest psychic status <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> snorlax unknownitem noability normal notype noeffect nostatus <conditions> noweather noconditions noconditions <player_prev> hyperbeam <opp_prev> earthquake',
+      dtype='<U764'), 'numbers': array([ 1.        ,  1.        ,  1.        ,  0.43137255,  0.25490198,
+        0.25490198,  0.25490198,  0.11764706,  0.627451  ,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.425     ,  1.        ,  0.        ,  0.75      ,
+        0.9       ,  0.        ,  0.        ,  1.        ,  0.        ,
+        0.        ,  1.        ,  0.        ,  1.        ,  1.        ,
+       -2.        , -2.        , -2.        ,  0.3       ,  1.        ,
+        0.43137255,  0.25490198,  0.25490198,  0.25490198,  0.11764706,
+        0.627451  ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+0.0  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4, 5]} 
+
+
+  Turn   21. | [⦻⦻⦻●●●][523/523hp]    snorlax -    snorlax [ 30%hp][●●●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> snorlax noitem noability normal notype noeffect nostatus <move> bodyslam normal physical <move> hyperbeam normal physical <move> reflect psychic status <move> rest psychic status <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> snorlax unknownitem noability normal notype reflect nostatus <conditions> noweather noconditions noconditions <player_prev> hyperbeam <opp_prev> reflect',
+      dtype='<U760'), 'numbers': array([ 1.        ,  1.        ,  1.        ,  0.43137255,  0.25490198,
+        0.25490198,  0.25490198,  0.11764706,  0.627451  ,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.425     ,  1.        ,  0.        ,  0.75      ,
+        0.9       ,  0.        ,  0.        ,  1.        ,  0.        ,
+        0.        ,  1.        ,  0.        ,  1.        ,  1.        ,
+       -2.        , -2.        , -2.        ,  0.3       ,  1.        ,
+        0.43137255,  0.25490198,  0.25490198,  0.25490198,  0.11764706,
+        0.627451  ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+0.0  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4, 5]} 
+
+
+  Turn   22. | [⦻⦻⦻●●●][353/353hp]     tauros -    snorlax [100%hp][●●●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> tauros noitem noability normal notype noeffect nostatus <move> blizzard ice special <move> bodyslam normal physical <move> earthquake ground physical <move> hyperbeam normal physical <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> snorlax noitem noability <moveset> bodyslam hyperbeam reflect rest <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> snorlax unknownitem noability normal notype reflect slp <conditions> noweather noconditions noconditions <player_prev> nomove <opp_prev> rest',
+      dtype='<U747'), 'numbers': array([ 1.        ,  1.        ,  1.        ,  0.39215687,  0.27450982,
+        0.37254903,  0.27450982,  0.43137255,  0.29411766,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.6       ,  0.9       ,  0.        ,  0.425     ,
+        1.        ,  0.        ,  0.5       ,  1.        ,  0.        ,
+        0.75      ,  0.9       ,  0.        ,  1.        ,  1.        ,
+       -2.        , -2.        , -2.        ,  1.        ,  1.        ,
+        0.43137255,  0.25490198,  0.25490198,  0.25490198,  0.11764706,
+        0.627451  ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+-0.19999999999999996  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4, 5]} 
+
+
+  Turn   23. | [⦻⦻⦻●●●][353/353hp]     tauros -    snorlax [ 13%hp][●●●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> tauros noitem noability normal notype noeffect nostatus <move> blizzard ice special <move> bodyslam normal physical <move> earthquake ground physical <move> hyperbeam normal physical <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> snorlax noitem noability <moveset> bodyslam hyperbeam reflect rest <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> snorlax unknownitem noability normal notype reflect slp <conditions> noweather noconditions noconditions <player_prev> hyperbeam <opp_prev> rest',
+      dtype='<U750'), 'numbers': array([ 1.        ,  1.        ,  1.        ,  0.39215687,  0.27450982,
+        0.37254903,  0.27450982,  0.43137255,  0.29411766,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.6       ,  0.9       ,  0.        ,  0.425     ,
+        1.        ,  0.        ,  0.5       ,  1.        ,  0.        ,
+        0.75      ,  0.9       ,  0.        ,  1.        ,  1.        ,
+       -2.        , -2.        , -2.        ,  0.13      ,  1.        ,
+        0.43137255,  0.25490198,  0.25490198,  0.25490198,  0.11764706,
+        0.627451  ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+0.87  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4, 5]} 
+
+
+  Turn   24. | [⦻⦻⦻●●●][353/353hp]     tauros -    starmie [ 58%hp][●●●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> tauros noitem noability normal notype noeffect nostatus <move> blizzard ice special <move> bodyslam normal physical <move> earthquake ground physical <move> hyperbeam normal physical <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> snorlax noitem noability <moveset> bodyslam hyperbeam reflect rest <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> starmie unknownitem noability psychic water noeffect frz <conditions> noweather noconditions noconditions <player_prev> hyperbeam <opp_prev> thunderwave',
+      dtype='<U758'), 'numbers': array([ 1.        ,  1.        ,  1.        ,  0.39215687,  0.27450982,
+        0.37254903,  0.27450982,  0.43137255,  0.29411766,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.6       ,  0.9       ,  0.        ,  0.425     ,
+        1.        ,  0.        ,  0.5       ,  1.        ,  0.        ,
+        0.75      ,  0.9       ,  0.        ,  1.        ,  1.        ,
+       -2.        , -2.        , -2.        ,  0.58      ,  1.        ,
+        0.29411766,  0.39215687,  0.33333334,  0.39215687,  0.4509804 ,
+        0.23529412,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+0.0  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4, 5]} 
+
+
+  Turn   25. | [⦻⦻⦻●●●][353/353hp]     tauros -    chansey [ 22%hp][●●●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> tauros noitem noability normal notype noeffect nostatus <move> blizzard ice special <move> bodyslam normal physical <move> earthquake ground physical <move> hyperbeam normal physical <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> snorlax noitem noability <moveset> bodyslam hyperbeam reflect rest <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> chansey unknownitem noability normal notype noeffect par <conditions> noweather noconditions noconditions <player_prev> hyperbeam <opp_prev> thunderbolt',
+      dtype='<U758'), 'numbers': array([ 1.        ,  1.        ,  1.        ,  0.39215687,  0.27450982,
+        0.37254903,  0.27450982,  0.43137255,  0.29411766,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.6       ,  0.9       ,  0.        ,  0.425     ,
+        1.        ,  0.        ,  0.5       ,  1.        ,  0.        ,
+        0.75      ,  0.9       ,  0.        ,  1.        ,  1.        ,
+       -2.        , -2.        , -2.        ,  0.22      ,  1.        ,
+        0.01960784,  0.4117647 ,  0.01960784,  0.4117647 ,  0.19607843,
+        0.98039216,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+0.0  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4, 5]} 
+
+
+  Turn   26. | [⦻⦻⦻●●●][353/353hp]     tauros -    chansey [ 22%hp][●●●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> tauros noitem noability normal notype noeffect par <move> blizzard ice special <move> bodyslam normal physical <move> earthquake ground physical <move> hyperbeam normal physical <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> snorlax noitem noability <moveset> bodyslam hyperbeam reflect rest <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> chansey unknownitem noability normal notype noeffect par <conditions> noweather noconditions noconditions <player_prev> hyperbeam <opp_prev> thunderwave',
+      dtype='<U753'), 'numbers': array([ 1.        ,  1.        ,  1.        ,  0.39215687,  0.27450982,
+        0.37254903,  0.27450982,  0.43137255,  0.29411766,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.6       ,  0.9       ,  0.        ,  0.425     ,
+        1.        ,  0.        ,  0.5       ,  1.        ,  0.        ,
+        0.75      ,  0.9       ,  0.        ,  1.        ,  1.        ,
+       -2.        , -2.        , -2.        ,  0.22      ,  1.        ,
+        0.01960784,  0.4117647 ,  0.01960784,  0.4117647 ,  0.19607843,
+        0.98039216,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+-0.5  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4, 5]} 
+
+
+  Turn   27. | [⦻⦻⦻●●●][353/353hp]     tauros -      golem [100%hp][●●●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> tauros noitem noability normal notype noeffect par <move> blizzard ice special <move> bodyslam normal physical <move> earthquake ground physical <move> hyperbeam normal physical <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> snorlax noitem noability <moveset> bodyslam hyperbeam reflect rest <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> golem unknownitem noability ground rock noeffect nostatus <conditions> noweather noconditions noconditions <player_prev> hyperbeam <opp_prev> rockslide',
+      dtype='<U752'), 'numbers': array([ 1.        ,  1.        ,  1.        ,  0.39215687,  0.27450982,
+        0.37254903,  0.27450982,  0.43137255,  0.29411766,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.6       ,  0.9       ,  0.        ,  0.425     ,
+        1.        ,  0.        ,  0.5       ,  1.        ,  0.        ,
+        0.75      ,  0.9       ,  0.        ,  1.        ,  1.        ,
+       -2.        , -2.        , -2.        ,  1.        ,  1.        ,
+        0.43137255,  0.21568628,  0.50980395,  0.21568628,  0.1764706 ,
+        0.3137255 ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+0.0  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4, 5]} 
+
+
+  Turn   28. | [⦻⦻⦻●●●][361/523hp]    snorlax -      golem [100%hp][●●●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> snorlax noitem noability normal notype noeffect nostatus <move> bodyslam normal physical <move> hyperbeam normal physical <move> reflect psychic status <move> rest psychic status <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> golem unknownitem noability ground rock noeffect nostatus <conditions> noweather noconditions noconditions <player_prev> hyperbeam <opp_prev> earthquake',
+      dtype='<U760'), 'numbers': array([ 1.        ,  0.69024855,  1.        ,  0.43137255,  0.25490198,
+        0.25490198,  0.25490198,  0.11764706,  0.627451  ,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.425     ,  1.        ,  0.        ,  0.75      ,
+        0.9       ,  0.        ,  0.        ,  1.        ,  0.        ,
+        0.        ,  1.        ,  0.        ,  1.        ,  1.        ,
+       -2.        , -2.        , -2.        ,  1.        ,  1.        ,
+        0.43137255,  0.21568628,  0.50980395,  0.21568628,  0.1764706 ,
+        0.3137255 ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+-0.30975143403441685  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4, 5]} 
+
+
+  Turn   29. | [⦻⦻⦻●●●][188/523hp]    snorlax -      golem [ 88%hp][●●●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> snorlax noitem noability normal notype noeffect nostatus <move> bodyslam normal physical <move> hyperbeam normal physical <move> reflect psychic status <move> rest psychic status <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> golem unknownitem noability ground rock noeffect nostatus <conditions> noweather noconditions noconditions <player_prev> bodyslam <opp_prev> earthquake',
+      dtype='<U759'), 'numbers': array([ 1.        ,  0.35946462,  1.        ,  0.43137255,  0.25490198,
+        0.25490198,  0.25490198,  0.11764706,  0.627451  ,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.425     ,  1.        ,  0.        ,  0.75      ,
+        0.9       ,  0.        ,  0.        ,  1.        ,  0.        ,
+        0.        ,  1.        ,  0.        ,  1.        ,  1.        ,
+       -2.        , -2.        , -2.        ,  0.88      ,  1.        ,
+        0.43137255,  0.21568628,  0.50980395,  0.21568628,  0.1764706 ,
+        0.3137255 ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+-0.2107839388145315  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4, 5]} 
+
+
+  Turn   29. | [⦻⦻⦻●⦻●][  0/523hp]    snorlax -      golem [ 88%hp][●●●●]next-obs ==> {'text': array('<gen1ou> <forcedswitch> <player> snorlax noitem noability normal notype noeffect fnt <move> bodyslam normal physical <move> hyperbeam normal physical <move> reflect psychic status <move> rest psychic status <switch> chansey noitem noability <moveset> icebeam softboiled thunderbolt thunderwave <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> golem unknownitem noability ground rock noeffect nostatus <conditions> noweather noconditions noconditions <player_prev> bodyslam <opp_prev> earthquake',
+      dtype='<U757'), 'numbers': array([ 1.        ,  0.        ,  1.        ,  0.43137255,  0.25490198,
+        0.25490198,  0.25490198,  0.11764706,  0.627451  ,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.425     ,  1.        ,  0.        ,  0.75      ,
+        0.9       ,  0.        ,  0.        ,  1.        ,  0.        ,
+        0.        ,  1.        ,  0.        ,  1.        ,  1.        ,
+       -2.        , -2.        , -2.        ,  0.88      ,  1.        ,
+        0.43137255,  0.21568628,  0.50980395,  0.21568628,  0.1764706 ,
+        0.3137255 ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+-0.8594646271510517  |  False  |  False   |  {'legal_actions': [4, 5]} 
+
+
+  Turn   30. | [⦻⦻⦻●⦻●][703/703hp]    chansey -      golem [ 88%hp][●●●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> chansey noitem noability normal notype noeffect nostatus <move> icebeam ice special <move> softboiled normal status <move> thunderbolt electric special <move> thunderwave electric status <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> golem unknownitem noability ground rock noeffect nostatus <conditions> noweather noconditions noconditions <player_prev> nomove <opp_prev> earthquake',
+      dtype='<U751'), 'numbers': array([ 1.        ,  1.        ,  1.        ,  0.01960784,  0.4117647 ,
+        0.01960784,  0.4117647 ,  0.19607843,  0.98039216,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.475     ,  1.        ,  0.        ,  0.        ,
+        1.        ,  0.        ,  0.475     ,  1.        ,  0.        ,
+        0.        ,  1.        ,  0.        ,  1.        , -2.        ,
+       -2.        , -2.        , -2.        ,  0.88      ,  1.        ,
+        0.43137255,  0.21568628,  0.50980395,  0.21568628,  0.1764706 ,
+        0.3137255 ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+-1.0  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4]} 
+
+
+  Turn   31. | [⦻⦻⦻●⦻●][703/703hp]    chansey -     tauros [100%hp][●●●●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> chansey noitem noability normal notype noeffect nostatus <move> icebeam ice special <move> softboiled normal status <move> thunderbolt electric special <move> thunderwave electric status <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> tauros unknownitem noability normal notype noeffect nostatus <conditions> noweather noconditions noconditions <player_prev> softboiled <opp_prev> nomove',
+      dtype='<U754'), 'numbers': array([ 1.        ,  1.        ,  1.        ,  0.01960784,  0.4117647 ,
+        0.01960784,  0.4117647 ,  0.19607843,  0.98039216,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.475     ,  1.        ,  0.        ,  0.        ,
+        1.        ,  0.        ,  0.475     ,  1.        ,  0.        ,
+        0.        ,  1.        ,  0.        ,  1.        , -2.        ,
+       -2.        , -2.        , -2.        ,  1.        ,  1.        ,
+        0.39215687,  0.27450982,  0.37254903,  0.27450982,  0.43137255,
+        0.29411766,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+0.0  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4]} 
+
+
+  Turn   32. | [⦻⦻⦻●⦻●][141/703hp]    chansey -     tauros [100%hp][●●●●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> chansey noitem noability normal notype noeffect nostatus <move> icebeam ice special <move> softboiled normal status <move> thunderbolt electric special <move> thunderwave electric status <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> tauros unknownitem noability normal notype noeffect par <conditions> noweather noconditions noconditions <player_prev> thunderwave <opp_prev> bodyslam',
+      dtype='<U752'), 'numbers': array([ 1.        ,  0.20056899,  1.        ,  0.01960784,  0.4117647 ,
+        0.01960784,  0.4117647 ,  0.19607843,  0.98039216,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.475     ,  1.        ,  0.        ,  0.        ,
+        1.        ,  0.        ,  0.475     ,  1.        ,  0.        ,
+        0.        ,  1.        ,  0.        ,  1.        , -2.        ,
+       -2.        , -2.        , -2.        ,  1.        ,  1.        ,
+        0.39215687,  0.27450982,  0.37254903,  0.27450982,  0.43137255,
+        0.29411766,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+-0.29943100995732574  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3, 4]} 
+
+
+  Turn   32. | [⦻⦻⦻⦻⦻●][  0/703hp]    chansey -     tauros [100%hp][●●●●●]next-obs ==> {'text': array('<gen1ou> <forcedswitch> <player> chansey noitem noability normal notype noeffect fnt <move> icebeam ice special <move> softboiled normal status <move> thunderbolt electric special <move> thunderwave electric status <switch> tauros noitem noability <moveset> blizzard bodyslam earthquake hyperbeam <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> tauros unknownitem noability normal notype noeffect par <conditions> noweather noconditions noconditions <player_prev> softboiled <opp_prev> bodyslam',
+      dtype='<U749'), 'numbers': array([ 1.        ,  0.        ,  1.        ,  0.01960784,  0.4117647 ,
+        0.01960784,  0.4117647 ,  0.19607843,  0.98039216,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.475     ,  1.        ,  0.        ,  0.        ,
+        1.        ,  0.        ,  0.475     ,  1.        ,  0.        ,
+        0.        ,  1.        ,  0.        ,  1.        , -2.        ,
+       -2.        , -2.        , -2.        ,  1.        ,  1.        ,
+        0.39215687,  0.27450982,  0.37254903,  0.27450982,  0.43137255,
+        0.29411766,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+-0.7005689900426743  |  False  |  False   |  {'legal_actions': [4]} 
+
+
+  Turn   33. | [⦻⦻⦻⦻⦻●][353/353hp]     tauros -     tauros [100%hp][●●●●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> tauros noitem noability normal notype noeffect par <move> blizzard ice special <move> bodyslam normal physical <move> earthquake ground physical <move> hyperbeam normal physical <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> tauros unknownitem noability normal notype noeffect par <conditions> noweather noconditions noconditions <player_prev> hyperbeam <opp_prev> bodyslam',
+      dtype='<U732'), 'numbers': array([ 1.        ,  1.        ,  1.        ,  0.39215687,  0.27450982,
+        0.37254903,  0.27450982,  0.43137255,  0.29411766,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.6       ,  0.9       ,  0.        ,  0.425     ,
+        1.        ,  0.        ,  0.5       ,  1.        ,  0.        ,
+        0.75      ,  0.9       ,  0.        , -2.        , -2.        ,
+       -2.        , -2.        , -2.        ,  1.        ,  1.        ,
+        0.39215687,  0.27450982,  0.37254903,  0.27450982,  0.43137255,
+        0.29411766,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+-1.0  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3]} 
+
+
+  Turn   34. | [⦻⦻⦻⦻⦻●][244/353hp]     tauros -     tauros [ 72%hp][●●●●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> tauros noitem noability normal notype noeffect par <move> blizzard ice special <move> bodyslam normal physical <move> earthquake ground physical <move> hyperbeam normal physical <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> tauros unknownitem noability normal notype noeffect par <conditions> noweather noconditions noconditions <player_prev> blizzard <opp_prev> bodyslam',
+      dtype='<U731'), 'numbers': array([ 1.        ,  0.69121814,  1.        ,  0.39215687,  0.27450982,
+        0.37254903,  0.27450982,  0.43137255,  0.29411766,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.6       ,  0.9       ,  0.        ,  0.425     ,
+        1.        ,  0.        ,  0.5       ,  1.        ,  0.        ,
+        0.75      ,  0.9       ,  0.        , -2.        , -2.        ,
+       -2.        , -2.        , -2.        ,  0.72      ,  1.        ,
+        0.39215687,  0.27450982,  0.37254903,  0.27450982,  0.43137255,
+        0.29411766,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+-0.028781869688385253  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3]} 
+
+
+  Turn   35. | [⦻⦻⦻⦻⦻●][244/353hp]     tauros -    starmie [ 21%hp][●●●●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> tauros noitem noability normal notype noeffect par <move> blizzard ice special <move> bodyslam normal physical <move> earthquake ground physical <move> hyperbeam normal physical <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> starmie unknownitem noability psychic water noeffect frz <conditions> noweather noconditions noconditions <player_prev> bodyslam <opp_prev> thunderwave',
+      dtype='<U735'), 'numbers': array([ 1.        ,  0.69121814,  1.        ,  0.39215687,  0.27450982,
+        0.37254903,  0.27450982,  0.43137255,  0.29411766,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.6       ,  0.9       ,  0.        ,  0.425     ,
+        1.        ,  0.        ,  0.5       ,  1.        ,  0.        ,
+        0.75      ,  0.9       ,  0.        , -2.        , -2.        ,
+       -2.        , -2.        , -2.        ,  0.21      ,  1.        ,
+        0.29411766,  0.39215687,  0.33333334,  0.39215687,  0.4509804 ,
+        0.23529412,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+0.0  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3]} 
+
+
+  Turn   36. | [⦻⦻⦻⦻⦻●][244/353hp]     tauros -      golem [ 64%hp][●●●●●]next-obs ==> {'text': array('<gen1ou> <anychoice> <player> tauros noitem noability normal notype noeffect par <move> blizzard ice special <move> bodyslam normal physical <move> earthquake ground physical <move> hyperbeam normal physical <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> golem unknownitem noability ground rock noeffect nostatus <conditions> noweather noconditions noconditions <player_prev> bodyslam <opp_prev> earthquake',
+      dtype='<U735'), 'numbers': array([ 1.        ,  0.69121814,  1.        ,  0.39215687,  0.27450982,
+        0.37254903,  0.27450982,  0.43137255,  0.29411766,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.6       ,  0.9       ,  0.        ,  0.425     ,
+        1.        ,  0.        ,  0.5       ,  1.        ,  0.        ,
+        0.75      ,  0.9       ,  0.        , -2.        , -2.        ,
+       -2.        , -2.        , -2.        ,  0.64      ,  1.        ,
+        0.43137255,  0.21568628,  0.50980395,  0.21568628,  0.1764706 ,
+        0.3137255 ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+0.0  |  False  |  False   |  {'legal_actions': [0, 1, 2, 3]} 
+
+
+  Turn   36. | [⦻⦻⦻⦻⦻⦻][  0/353hp]     tauros -      golem [  0%hp][●●⦻●●]
+next-obs ==> {'text': array('<gen1ou> <anychoice> <player> tauros noitem noability normal notype noeffect fnt <move> blizzard ice special <move> bodyslam normal physical <move> earthquake ground physical <move> hyperbeam normal physical <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <switch> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <opponent> golem unknownitem noability ground rock noeffect fnt <conditions> noweather noconditions noconditions <player_prev> bodyslam <opp_prev> explosion',
+      dtype='<U729'), 'numbers': array([ 0.8333333 ,  0.        ,  1.        ,  0.39215687,  0.27450982,
+        0.37254903,  0.27450982,  0.43137255,  0.29411766,  0.        ,
+        0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.6       ,  0.9       ,  0.        ,  0.425     ,
+        1.        ,  0.        ,  0.5       ,  1.        ,  0.        ,
+        0.75      ,  0.9       ,  0.        , -2.        , -2.        ,
+       -2.        , -2.        , -2.        ,  0.        ,  1.        ,
+        0.43137255,  0.21568628,  0.50980395,  0.21568628,  0.1764706 ,
+        0.3137255 ,  0.        ,  0.        ,  0.        ,  0.        ,
+        0.        ,  0.        ,  0.        ], dtype=float32)}
+__________________________________________________
+-98.55121813031161  |  True  |  False   |  {'legal_actions': [0, 1, 2, 3], 'valid_action_count': 30, 'invalid_action_count': 11, 'won': False} 
+
+

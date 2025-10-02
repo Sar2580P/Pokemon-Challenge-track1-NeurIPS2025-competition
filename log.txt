@@ -1,0 +1,336 @@
+Starting  training with MODAL...
+---------------------------------
+🤖 Executing Command:
+modal run custom/gen9/evaluate.py --agent HRM_gen9ou_ABRA --eval_type pokeagent --gens 9 --formats ou --total_battles 50 --checkpoints results/HRM_Pokemon_Gen9/ckpts/policy_weights/policy_epoch_0.pt --avatar lucas --team_set competitive --battle_backend metamon --save_trajectories_to eval_replays --save_team_results_to team_results.csv 
+---------------------------------
+✓ Initialized. View run at https://modal.com/apps/sarvp2486/main/ap-5f99HfJ4q9A7toeCwwt66N
+✓ Created objects.
+├── 🔨 Created mount /home/sarvp-srk/Pokemon-Challenge-track1/environment.yml
+├── 🔨 Created mount /home/sarvp-srk/Pokemon-Challenge-track1/custom/gen9/evaluate.py
+├── 🔨 Created mount /home/sarvp-srk/Pokemon-Challenge-track1/custom
+├── 🔨 Created mount entrypoint.sh
+└── 🔨 Created function evaluate_model.
++ sleep 2
++ tailscaled --tun=userspace-networking --socks5-server=localhost:1080
+2025/10/01 04:57:05 monitor: monitor_linux: AF_NETLINK RTMGRP failed, falling back to polling
+2025/10/01 04:57:05 logtail started
+2025/10/01 04:57:05 Program starting: v1.88.3-tf453b350e-g6ebb4c936, Go 1.25.1: []string{"tailscaled", "--tun=userspace-networking", "--socks5-server=localhost:1080"}
+2025/10/01 04:57:05 LogID: 45a8f15f41b6840c559743146fe9328632d3044aeed1bc3752b16fb42c1dbe31
+2025/10/01 04:57:05 logpolicy: using system state directory "/var/lib/tailscale"
+logpolicy.ConfigFromFile /var/lib/tailscale/tailscaled.log.conf: open /var/lib/tailscale/tailscaled.log.conf: no such file or directory
+logpolicy.Config.Validate for /var/lib/tailscale/tailscaled.log.conf: config is nil
+2025/10/01 04:57:05 dns: [rc=unknown ret=direct]
+2025/10/01 04:57:05 dns: using "direct" mode
+2025/10/01 04:57:05 dns: using *dns.directManager
+2025/10/01 04:57:05 dns: inotify: NewDirWatcher: context canceled
+2025/10/01 04:57:05 wgengine.NewUserspaceEngine(tun "userspace-networking") ...
+2025/10/01 04:57:05 dns: using dns.noopManager
+2025/10/01 04:57:05 link state: interfaces.State{defaultRoute=eth0 ifs={eth0:[172.20.0.26/16]} v4=true v6=false}
+2025/10/01 04:57:05 onPortUpdate(port=51848, network=udp6)
+2025/10/01 04:57:05 magicsock: [warning] failed to force-set UDP read buffer size to 7340032: operation not permitted; using kernel default values (impacts throughput only)
+2025/10/01 04:57:05 onPortUpdate(port=53614, network=udp4)
+2025/10/01 04:57:05 magicsock: [warning] failed to force-set UDP read buffer size to 7340032: operation not permitted; using kernel default values (impacts throughput only)
+2025/10/01 04:57:05 magicsock: disco key = d:0441bf49d8961cbd
+2025/10/01 04:57:05 Creating WireGuard device...
+2025/10/01 04:57:05 Bringing WireGuard device up...
+2025/10/01 04:57:05 Bringing router up...
+2025/10/01 04:57:05 Clearing router settings...
+2025/10/01 04:57:05 Starting network monitor...
+2025/10/01 04:57:05 Engine created.
+2025/10/01 04:57:05 pm: migrating "_daemon" profile to new format
+2025/10/01 04:57:05 logpolicy: using system state directory "/var/lib/tailscale"
+2025/10/01 04:57:05 got LocalBackend in 27ms
+2025/10/01 04:57:05 Start
+2025/10/01 04:57:05 ipnext: active extensions: relayserver, taildrop
+2025/10/01 04:57:05 TPM: error opening: stat /dev/tpm0: no such file or directory
+2025/10/01 04:57:05 Backend: logs: be:45a8f15f41b6840c559743146fe9328632d3044aeed1bc3752b16fb42c1dbe31 fe:
+2025/10/01 04:57:05 Switching ipn state NoState -> NeedsLogin (WantRunning=false, nm=false)
+2025/10/01 04:57:05 health(warnable=wantrunning-false): error: Tailscale is stopped.
+2025/10/01 04:57:05 blockEngineUpdates(true)
+2025/10/01 04:57:05 wgengine: Reconfig: configuring userspace WireGuard config (with 0/0 peers)
+2025/10/01 04:57:05 wgengine: Reconfig: configuring router
+2025/10/01 04:57:05 wgengine: Reconfig: user dialer
+2025/10/01 04:57:05 wgengine: Reconfig: configuring DNS
+2025/10/01 04:57:05 dns: Set: {DefaultResolvers:[] Routes:{} SearchDomains:[] Hosts:0}
+2025/10/01 04:57:05 dns: Resolvercfg: {Routes:{} Hosts:0 LocalDomains:[]}
+2025/10/01 04:57:05 dns: OScfg: {}
++ tailscale up --authkey=tskey-auth-k6Rb5rxHcA21CNTRL-D2k4FjKXnjPENENQLQRGkPqQrD1BAjPsJ --hostname=metamon-eval-container --exit-node=100.107.183.63
+2025/10/01 04:57:07 Start
+2025/10/01 04:57:07 generating new machine key
+2025/10/01 04:57:07 machine key written to store
+2025/10/01 04:57:07 Backend: logs: be:45a8f15f41b6840c559743146fe9328632d3044aeed1bc3752b16fb42c1dbe31 fe:
+2025/10/01 04:57:07 Switching ipn state NoState -> NeedsLogin (WantRunning=true, nm=false)
+2025/10/01 04:57:07 blockEngineUpdates(true)
+2025/10/01 04:57:07 health(warnable=warming-up): error: Tailscale is starting. Please wait.
+2025/10/01 04:57:07 health(warnable=wantrunning-false): ok
+2025/10/01 04:57:07 control: client.Shutdown ...
+2025/10/01 04:57:07 control: updateRoutine: exiting
+2025/10/01 04:57:07 control: authRoutine: exiting
+2025/10/01 04:57:07 control: mapRoutine: exiting
+2025/10/01 04:57:07 control: Client.Shutdown done.
+2025/10/01 04:57:07 StartLoginInteractiveAs("root"): url=false
+2025/10/01 04:57:07 control: client.Login(2)
+2025/10/01 04:57:07 control: LoginInteractive -> regen=true
+2025/10/01 04:57:07 control: doLogin(regen=true, hasUrl=false)
+2025/10/01 04:57:08 control: control server key from https://controlplane.tailscale.com: ts2021=[fSeS+], legacy=[nlFWp]
+2025/10/01 04:57:08 control: Generating a new nodekey.
+2025/10/01 04:57:08 control: RegisterReq: onode= node=[IhTUS] fup=false nks=false
+2025/10/01 04:57:09 control: RegisterReq: got response; nodeKeyExpired=false, machineAuthorized=true; authURL=false
+2025/10/01 04:57:09 blockEngineUpdates(false)
+2025/10/01 04:57:09 health(warnable=not-in-map-poll): ok
+2025/10/01 04:57:09 control: netmap: got new dial plan from control
+2025/10/01 04:57:09 using tailnet default auto-update setting: true
+2025/10/01 04:57:09 EditPrefs: MaskedPrefs{AutoUpdate={Apply=true}}
+2025/10/01 04:57:09 offline auto-update: starting update checks
+2025/10/01 04:57:09 active login: sarvp2486@gmail.com
+2025/10/01 04:57:09 monitor: gateway and self IP changed: gw=172.20.0.1 self=172.20.0.26
+2025/10/01 04:57:09 allowing exit node access to local IPs: [127.0.0.0/8]
+2025/10/01 04:57:09 magicsock: SetPrivateKey called (init)
+2025/10/01 04:57:09 wgengine: Reconfig: configuring userspace WireGuard config (with 0/8 peers)
+2025/10/01 04:57:09 wgengine: Reconfig: configuring router
+2025/10/01 04:57:09 wgengine: Reconfig: user dialer
+2025/10/01 04:57:09 tsdial: bart table size: 15
+2025/10/01 04:57:09 wgengine: Reconfig: configuring DNS
+2025/10/01 04:57:09 dns: Set: {DefaultResolvers:[http://100.107.183.63:59537/dns-query] Routes:{tail0a5637.ts.net.:[]}+65arpa SearchDomains:[tail0a5637.ts.net.] Hosts:9}
+2025/10/01 04:57:09 dns: Resolvercfg: {Routes:{.:[http://100.107.183.63:59537/dns-query]} Hosts:9 LocalDomains:[tail0a5637.ts.net.]+65arpa}
+2025/10/01 04:57:09 dns: OScfg: {Nameservers:[100.100.100.100] SearchDomains:[tail0a5637.ts.net.] }
+2025/10/01 04:57:09 peerapi: serving on http://100.86.253.21:61451
+2025/10/01 04:57:09 peerapi: serving on http://[fd7a:115c:a1e0::4801:fd15]:61451
+2025/10/01 04:57:09 Switching ipn state NeedsLogin -> Starting (WantRunning=true, nm=true)
+2025/10/01 04:57:09 allowing exit node access to local IPs: [127.0.0.0/8]
+2025/10/01 04:57:09 allowing exit node access to local IPs: [127.0.0.0/8]
+2025/10/01 04:57:09 allowing exit node access to local IPs: [127.0.0.0/8]
+2025/10/01 04:57:10 netcheck: DetectCaptivePortal(found=false)
+2025/10/01 04:57:10 magicsock: home DERP changing from derp-0 [0ms] to derp-7 [2ms]
+2025/10/01 04:57:10 magicsock: home is now derp-7 (tok)
+2025/10/01 04:57:10 magicsock: adding connection to derp-7 for home-keep-alive
+2025/10/01 04:57:10 magicsock: 1 active derp conns: derp-7=cr0s,wr0s
+2025/10/01 04:57:10 derphttp.Client.Connect: connecting to derp-7 (tok)
+2025/10/01 04:57:10 control: NetInfo: NetInfo{varies=false hairpin= ipv6=false ipv6os=false udp=true icmpv4=false derp=#7 portmap= link="" firewallmode=""}
+2025/10/01 04:57:10 offline auto-update: stopping update checks
+2025/10/01 04:57:10 magicsock: endpoints changed: 34.84.167.215:53614 (stun), 172.20.0.26:53614 (local)
+2025/10/01 04:57:10 health(warnable=no-derp-connection): ok
+2025/10/01 04:57:10 Switching ipn state Starting -> Running (WantRunning=true, nm=true)
+2025/10/01 04:57:10 health(warnable=warming-up): ok
+2025/10/01 04:57:10 health(warnable=no-derp-connection): ok
+2025/10/01 04:57:10 [RATELIMIT] format("health(warnable=%s): ok")
++ echo Waiting for SOCKS5 proxy to be ready...
++ nc -z localhost 1080
+Waiting for SOCKS5 proxy to be ready...
+2025/10/01 04:57:10 magicsock: derp-7 connected; connGen=1
+2025/10/01 04:57:10 socks5: client connection failed: could not read packet header
++ echo SOCKS5 proxy is ready.
++ exec python -u -R --check-hash-based-pycs never -m modal._container_entrypoint Ch10YS0wMUs2RjIzMjNTQjBNQUpHVkswWE0zS05KMBIZZnUtS3hxQ1hzNGJDVzJzTnU5YTd0Y0ZDNyIZYXAtNWY5OUhmSjRxOUE3dG9lQ3d3dDY2TjrHBAoIZXZhbHVhdGUSDmV2YWx1YXRlX21vZGVsGhltby1YVUdkcHh6bk1iNHZ0aXpacmllRDI0Ghltby1mZTh6a0RRbk1PdmpBbHBEdnlaOEpXGhltby1hU2pDWTlDSlhFcDQ0MFAzTXRIc3pDGhltby1CQTd2UkZqRzI5VTM5SzBpMjFRdUlFIhlpbS1XdU14SEZVQ05TczdUa2VTTjlpTjl2OAJAAkoIIgYQASICTDRSGXN0LWNHd1FPYjBhRUV3bVcxTXJwRjcwaklSGXN0LW1yVzdRaUhnYXNEdXo1UGRkVDR5a0hSGXN0LVd5R2ZJaTdZcjlXVXp0S1NLSjRzaWtSGXN0LXpPSGl4bEl5ZE91RTF4Y3p6UW82bzmoAeCoAfoBHk1ldGFtb25fZXZhbHVhdGlvbl9nZW45b3VfMjAyNYoCIwoZdm8tQTB0Zk9mVWFoWUp3Yk9xd3BnWHVaSBIEL3ZvbBgB2gIbChlzdC1jR3dRT2IwYUVFd21XMU1ycEY3MGpJ2gIbChlzdC1tclc3UWlIZ2FzRHV6NVBkZFQ0eWtI2gIbChlzdC1XeUdmSWk3WXI5V1V6dEtTS0o0c2lr2gIbChlzdC16T0hpeGxJeWRPdUUxeGN6elFvNm852gIbChlpbS1XdU14SEZVQ05TczdUa2VTTjlpTjl22gIbChl2by1BMHRmT2ZVYWhZSndiT3F3cGdYdVpIwgMA+AMB2AQB+gQAggUVCAESDQoHYXJnbGlzdEICCAUaAggFkAUBsAXgqAFqBG1haW4=
+SOCKS5 proxy is ready.
+
+Laddering for 50 battles
+Made PokeAgent Ladder Env
+2025/10/01 04:57:28 socks5: client connection failed: incompatible SOCKS version
+2025-10-01 04:57:28,954 - PAC-srsk-1729 - ERROR - Unhandled exception raised while handling message:
+|challstr|4|39e4b82068ce35722fb472ba28c8f9617daaacdeb03f16820c759f0dd4067060379a686115df52e4d5e5541dd1c846bd5ab3c170ccc7d55ee3902f99229831757703d38e54e6e8a4f73367df695859af2fef88cc1f4638a4291c5b73ecd267e1547077c2cc2b2e18f9ea40ef0d39005eb08b06acafcfed3656a0305644f26059
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 773, in urlopen
+    self._prepare_proxy(conn)
+  File "/usr/local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1042, in _prepare_proxy
+    conn.connect()
+  File "/usr/local/lib/python3.10/site-packages/urllib3/connection.py", line 770, in connect
+    self._tunnel()
+  File "/usr/local/lib/python3.10/site-packages/urllib3/connection.py", line 265, in _tunnel
+    (version, code, message) = response._read_status()  # type: ignore[attr-defined]
+  File "/usr/local/lib/python3.10/http/client.py", line 279, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/local/lib/python3.10/socket.py", line 717, in readinto
+    return self._sock.recv_into(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "/usr/local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "/usr/local/lib/python3.10/site-packages/urllib3/util/retry.py", line 474, in increment
+    raise reraise(type(error), error, _stacktrace)
+  File "/usr/local/lib/python3.10/site-packages/urllib3/util/util.py", line 38, in reraise
+    raise value.with_traceback(tb)
+  File "/usr/local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 773, in urlopen
+    self._prepare_proxy(conn)
+  File "/usr/local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1042, in _prepare_proxy
+    conn.connect()
+  File "/usr/local/lib/python3.10/site-packages/urllib3/connection.py", line 770, in connect
+    self._tunnel()
+  File "/usr/local/lib/python3.10/site-packages/urllib3/connection.py", line 265, in _tunnel
+    (version, code, message) = response._read_status()  # type: ignore[attr-defined]
+  File "/usr/local/lib/python3.10/http/client.py", line 279, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/local/lib/python3.10/socket.py", line 717, in readinto
+    return self._sock.recv_into(b)
+urllib3.exceptions.ProtocolError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/poke_env/ps_client/ps_client.py", line 139, in _handle_message
+    await self.log_in(split_messages[0])
+  File "/usr/local/lib/python3.10/site-packages/poke_env/ps_client/ps_client.py", line 242, in log_in
+    log_in_request = requests.post(
+  File "/usr/local/lib/python3.10/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/usr/local/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/usr/local/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/local/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/local/lib/python3.10/site-packages/requests/adapters.py", line 682, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+2025/10/01 04:57:47 allowing exit node access to local IPs: [127.0.0.0/8]
+2025/10/01 04:57:47 wgengine: Reconfig: configuring userspace WireGuard config (with 0/7 peers)
+2025/10/01 04:57:47 wgengine: Reconfig: configuring router
+2025/10/01 04:57:47 wgengine: Reconfig: user dialer
+2025/10/01 04:57:47 tsdial: bart table size: 14
+2025/10/01 04:57:47 wgengine: Reconfig: configuring DNS
+2025/10/01 04:57:47 dns: Set: {DefaultResolvers:[http://100.107.183.63:59537/dns-query] Routes:{tail0a5637.ts.net.:[]}+65arpa SearchDomains:[tail0a5637.ts.net.] Hosts:8}
+2025/10/01 04:57:47 dns: Resolvercfg: {Routes:{.:[http://100.107.183.63:59537/dns-query]} Hosts:8 LocalDomains:[tail0a5637.ts.net.]+65arpa}
+2025/10/01 04:57:47 dns: OScfg: {Nameservers:[100.100.100.100] SearchDomains:[tail0a5637.ts.net.] }
+2025/10/01 04:57:47 allowing exit node access to local IPs: [127.0.0.0/8]
+2025/10/01 04:57:47 wgengine: Reconfig: configuring userspace WireGuard config (with 0/6 peers)
+2025/10/01 04:57:47 wgengine: Reconfig: configuring router
+2025/10/01 04:57:47 wgengine: Reconfig: user dialer
+2025/10/01 04:57:47 tsdial: bart table size: 13
+2025/10/01 04:57:47 wgengine: Reconfig: configuring DNS
+2025/10/01 04:57:47 dns: Set: {DefaultResolvers:[http://100.107.183.63:59537/dns-query] Routes:{tail0a5637.ts.net.:[]}+65arpa SearchDomains:[tail0a5637.ts.net.] Hosts:7}
+2025/10/01 04:57:47 dns: Resolvercfg: {Routes:{.:[http://100.107.183.63:59537/dns-query]} Hosts:7 LocalDomains:[tail0a5637.ts.net.]+65arpa}
+2025/10/01 04:57:47 dns: OScfg: {Nameservers:[100.100.100.100] SearchDomains:[tail0a5637.ts.net.] }
++ sleep 2
++ tailscaled --tun=userspace-networking --socks5-server=localhost:1080
+2025/10/01 04:59:52 monitor: monitor_linux: AF_NETLINK RTMGRP failed, falling back to polling
+2025/10/01 04:59:52 logtail started
+2025/10/01 04:59:52 Program starting: v1.88.3-tf453b350e-g6ebb4c936, Go 1.25.1: []string{"tailscaled", "--tun=userspace-networking", "--socks5-server=localhost:1080"}
+2025/10/01 04:59:52 LogID: d1c11166706235d3f0fed7d2ce506ca8c87e75017d93b7728c0cdc96b015bdb0
+2025/10/01 04:59:52 logpolicy: using system state directory "/var/lib/tailscale"
+logpolicy.ConfigFromFile /var/lib/tailscale/tailscaled.log.conf: open /var/lib/tailscale/tailscaled.log.conf: no such file or directory
+logpolicy.Config.Validate for /var/lib/tailscale/tailscaled.log.conf: config is nil
+2025/10/01 04:59:52 dns: [rc=unknown ret=direct]
+2025/10/01 04:59:52 dns: using "direct" mode
+2025/10/01 04:59:52 dns: using *dns.directManager
+2025/10/01 04:59:52 dns: inotify: NewDirWatcher: context canceled
+2025/10/01 04:59:52 wgengine.NewUserspaceEngine(tun "userspace-networking") ...
+2025/10/01 04:59:52 dns: using dns.noopManager
+2025/10/01 04:59:52 link state: interfaces.State{defaultRoute=eth0 ifs={eth0:[172.20.0.94/16]} v4=true v6=false}
+2025/10/01 04:59:52 onPortUpdate(port=62490, network=udp6)
+2025/10/01 04:59:52 magicsock: [warning] failed to force-set UDP read buffer size to 7340032: operation not permitted; using kernel default values (impacts throughput only)
+2025/10/01 04:59:52 onPortUpdate(port=22877, network=udp4)
+2025/10/01 04:59:52 magicsock: [warning] failed to force-set UDP read buffer size to 7340032: operation not permitted; using kernel default values (impacts throughput only)
+2025/10/01 04:59:52 magicsock: disco key = d:816e5675b30c1e89
+2025/10/01 04:59:52 Creating WireGuard device...
+2025/10/01 04:59:52 Bringing WireGuard device up...
+2025/10/01 04:59:52 Bringing router up...
+2025/10/01 04:59:52 Clearing router settings...
+2025/10/01 04:59:52 Starting network monitor...
+2025/10/01 04:59:52 Engine created.
+2025/10/01 04:59:52 pm: migrating "_daemon" profile to new format
+2025/10/01 04:59:52 logpolicy: using system state directory "/var/lib/tailscale"
+2025/10/01 04:59:52 got LocalBackend in 25ms
+2025/10/01 04:59:52 Start
+2025/10/01 04:59:52 ipnext: active extensions: relayserver, taildrop
+2025/10/01 04:59:52 TPM: error opening: stat /dev/tpm0: no such file or directory
+2025/10/01 04:59:52 Backend: logs: be:d1c11166706235d3f0fed7d2ce506ca8c87e75017d93b7728c0cdc96b015bdb0 fe:
+2025/10/01 04:59:52 Switching ipn state NoState -> NeedsLogin (WantRunning=false, nm=false)
+2025/10/01 04:59:52 health(warnable=wantrunning-false): error: Tailscale is stopped.
+2025/10/01 04:59:52 blockEngineUpdates(true)
+2025/10/01 04:59:52 wgengine: Reconfig: configuring userspace WireGuard config (with 0/0 peers)
+2025/10/01 04:59:52 wgengine: Reconfig: configuring router
+2025/10/01 04:59:52 wgengine: Reconfig: user dialer
+2025/10/01 04:59:52 wgengine: Reconfig: configuring DNS
+2025/10/01 04:59:52 dns: Set: {DefaultResolvers:[] Routes:{} SearchDomains:[] Hosts:0}
+2025/10/01 04:59:52 dns: Resolvercfg: {Routes:{} Hosts:0 LocalDomains:[]}
+2025/10/01 04:59:52 dns: OScfg: {}
++ tailscale up --authkey=tskey-auth-k6Rb5rxHcA21CNTRL-D2k4FjKXnjPENENQLQRGkPqQrD1BAjPsJ --hostname=metamon-eval-container --exit-node=100.107.183.63
+2025/10/01 04:59:54 Start
+2025/10/01 04:59:54 generating new machine key
+2025/10/01 04:59:54 machine key written to store
+2025/10/01 04:59:54 Backend: logs: be:d1c11166706235d3f0fed7d2ce506ca8c87e75017d93b7728c0cdc96b015bdb0 fe:
+2025/10/01 04:59:54 health(warnable=warming-up): error: Tailscale is starting. Please wait.
+2025/10/01 04:59:54 health(warnable=wantrunning-false): ok
+2025/10/01 04:59:54 Switching ipn state NoState -> NeedsLogin (WantRunning=true, nm=false)
+2025/10/01 04:59:54 blockEngineUpdates(true)
+2025/10/01 04:59:54 control: client.Shutdown ...
+2025/10/01 04:59:54 control: mapRoutine: exiting
+2025/10/01 04:59:54 control: authRoutine: exiting
+2025/10/01 04:59:54 control: updateRoutine: exiting
+2025/10/01 04:59:54 control: Client.Shutdown done.
+2025/10/01 04:59:54 StartLoginInteractiveAs("root"): url=false
+2025/10/01 04:59:54 control: client.Login(2)
+2025/10/01 04:59:54 control: LoginInteractive -> regen=true
+2025/10/01 04:59:54 control: doLogin(regen=true, hasUrl=false)
+2025/10/01 04:59:55 control: control server key from https://controlplane.tailscale.com: ts2021=[fSeS+], legacy=[nlFWp]
+2025/10/01 04:59:55 control: Generating a new nodekey.
+2025/10/01 04:59:55 control: RegisterReq: onode= node=[U4/3v] fup=false nks=false
+2025/10/01 04:59:55 control: RegisterReq: got response; nodeKeyExpired=false, machineAuthorized=true; authURL=false
+2025/10/01 04:59:55 blockEngineUpdates(false)
+2025/10/01 04:59:56 allowing exit node access to local IPs: [127.0.0.0/8]
+2025/10/01 04:59:56 wgengine: Reconfig: configuring router
+2025/10/01 04:59:56 wgengine: Reconfig: user dialer
+2025/10/01 04:59:56 tsdial: bart table size: 13
+2025/10/01 04:59:56 wgengine: Reconfig: configuring DNS
+2025/10/01 04:59:56 dns: Set: {DefaultResolvers:[http://100.107.183.63:59537/dns-query] Routes:{tail0a5637.ts.net.:[]}+65arpa SearchDomains:[tail0a5637.ts.net.] Hosts:8}
+2025/10/01 04:59:56 dns: Resolvercfg: {Routes:{.:[http://100.107.183.63:59537/dns-query]} Hosts:8 LocalDomains:[tail0a5637.ts.net.]+65arpa}
+2025/10/01 04:59:56 dns: OScfg: {Nameservers:[100.100.100.100] SearchDomains:[tail0a5637.ts.net.] }
+2025/10/01 04:59:56 allowing exit node access to local IPs: [127.0.0.0/8]
+2025/10/01 04:59:56 wgengine: Reconfig: configuring userspace WireGuard config (with 0/7 peers)
+2025/10/01 04:59:56 wgengine: Reconfig: configuring router
+2025/10/01 04:59:56 wgengine: Reconfig: user dialer
+2025/10/01 04:59:56 tsdial: bart table size: 14
+2025/10/01 04:59:56 wgengine: Reconfig: configuring DNS
+2025/10/01 04:59:56 dns: Set: {DefaultResolvers:[http://100.107.183.63:59537/dns-query] Routes:{tail0a5637.ts.net.:[]}+65arpa SearchDomains:[tail0a5637.ts.net.] Hosts:8}
+2025/10/01 04:59:56 dns: Resolvercfg: {Routes:{.:[http://100.107.183.63:59537/dns-query]} Hosts:8 LocalDomains:[tail0a5637.ts.net.]+65arpa}
+2025/10/01 04:59:56 dns: OScfg: {Nameservers:[100.100.100.100] SearchDomains:[tail0a5637.ts.net.] }
+2025/10/01 04:59:56 health(warnable=not-in-map-poll): ok
+2025/10/01 04:59:56 control: netmap: got new dial plan from control
+2025/10/01 04:59:56 using tailnet default auto-update setting: true
+2025/10/01 04:59:56 EditPrefs: MaskedPrefs{AutoUpdate={Apply=true}}
+2025/10/01 04:59:56 offline auto-update: starting update checks
+2025/10/01 04:59:56 active login: sarvp2486@gmail.com
+2025/10/01 04:59:56 monitor: gateway and self IP changed: gw=172.20.0.1 self=172.20.0.94
+2025/10/01 04:59:56 allowing exit node access to local IPs: [127.0.0.0/8]
+2025/10/01 04:59:56 magicsock: SetPrivateKey called (init)
+2025/10/01 04:59:56 wgengine: Reconfig: configuring userspace WireGuard config (with 0/7 peers)
+2025/10/01 04:59:56 wgengine: Reconfig: configuring router
+2025/10/01 04:59:56 wgengine: Reconfig: user dialer
+2025/10/01 04:59:56 tsdial: bart table size: 14
+2025/10/01 04:59:56 wgengine: Reconfig: configuring DNS
+2025/10/01 04:59:56 dns: Set: {DefaultResolvers:[http://100.107.183.63:59537/dns-query] Routes:{tail0a5637.ts.net.:[]}+65arpa SearchDomains:[tail0a5637.ts.net.] Hosts:8}
+2025/10/01 04:59:56 dns: Resolvercfg: {Routes:{.:[http://100.107.183.63:59537/dns-query]} Hosts:8 LocalDomains:[tail0a5637.ts.net.]+65arpa}
+2025/10/01 04:59:56 dns: OScfg: {Nameservers:[100.100.100.100] SearchDomains:[tail0a5637.ts.net.] }
+2025/10/01 04:59:56 peerapi: serving on http://100.109.115.106:41746
+2025/10/01 04:59:56 peerapi: serving on http://[fd7a:115c:a1e0::101:7374]:41746
+2025/10/01 04:59:56 Switching ipn state NeedsLogin -> Starting (WantRunning=true, nm=true)
+2025/10/01 04:59:56 allowing exit node access to local IPs: [127.0.0.0/8]
+2025/10/01 04:59:56 allowing exit node access to local IPs: [127.0.0.0/8]
+2025/10/01 04:59:57 netcheck: DetectCaptivePortal(found=false)
+2025/10/01 04:59:57 magicsock: home DERP changing from derp-0 [0ms] to derp-7 [34ms]
+2025/10/01 04:59:57 magicsock: home is now derp-7 (tok)
+2025/10/01 04:59:57 magicsock: adding connection to derp-7 for home-keep-alive
+2025/10/01 04:59:57 magicsock: 1 active derp conns: derp-7=cr0s,wr0s
+2025/10/01 04:59:57 control: NetInfo: NetInfo{varies=false hairpin= ipv6=false ipv6os=false udp=true icmpv4=false derp=#7 portmap= link="" firewallmode=""}
+2025/10/01 04:59:57 derphttp.Client.Connect: connecting to derp-7 (tok)
+2025/10/01 04:59:57 offline auto-update: stopping update checks
+2025/10/01 04:59:57 Switching ipn state Starting -> Running (WantRunning=true, nm=true)
+2025/10/01 04:59:57 health(warnable=warming-up): ok
+2025/10/01 04:59:57 health(warnable=no-derp-connection): ok
+2025/10/01 04:59:57 magicsock: endpoints changed: 34.64.175.96:22877 (stun), 172.20.0.94:22877 (local)
+2025/10/01 04:59:57 health(warnable=no-derp-connection): ok
+2025/10/01 04:59:57 [RATELIMIT] format("health(warnable=%s): ok")
+Waiting for SOCKS5 proxy to be ready...
++ echo Waiting for SOCKS5 proxy to be ready...
++ nc -z localhost 1080
+2025/10/01 04:59:57 socks5: client connection failed: could not read packet header
++ echo SOCKS5 proxy is ready.
++ exec python -u -R --check-hash-based-pycs never -m modal._container_entrypoint Ch10YS0wMUs2RjI4Mk4zV0JSWDhSTVRUV0VCSFQ5WhIZZnUtS3hxQ1hzNGJDVzJzTnU5YTd0Y0ZDNyIZYXAtNWY5OUhmSjRxOUE3dG9lQ3d3dDY2TjrHBAoIZXZhbHVhdGUSDmV2YWx1YXRlX21vZGVsGhltby1YVUdkcHh6bk1iNHZ0aXpacmllRDI0Ghltby1mZTh6a0RRbk1PdmpBbHBEdnlaOEpXGhltby1hU2pDWTlDSlhFcDQ0MFAzTXRIc3pDGhltby1CQTd2UkZqRzI5VTM5SzBpMjFRdUlFIhlpbS1XdU14SEZVQ05TczdUa2VTTjlpTjl2OAJAAkoIIgYQASICTDRSGXN0LWNHd1FPYjBhRUV3bVcxTXJwRjcwaklSGXN0LW1yVzdRaUhnYXNEdXo1UGRkVDR5a0hSGXN0LVd5R2ZJaTdZcjlXVXp0S1NLSjRzaWtSGXN0LXpPSGl4bEl5ZE91RTF4Y3p6UW82bzmoAeCoAfoBHk1ldGFtb25fZXZhbHVhdGlvbl9nZW45b3VfMjAyNYoCIwoZdm8tQTB0Zk9mVWFoWUp3Yk9xd3BnWHVaSBIEL3ZvbBgB2gIbChlzdC1jR3dRT2IwYUVFd21XMU1ycEY3MGpJ2gIbChlzdC1tclc3UWlIZ2FzRHV6NVBkZFQ0eWtI2gIbChlzdC1XeUdmSWk3WXI5V1V6dEtTS0o0c2lr2gIbChlzdC16T0hpeGxJeWRPdUUxeGN6elFvNm852gIbChlpbS1XdU14SEZVQ05TczdUa2VTTjlpTjl22gIbChl2by1BMHRmT2ZVYWhZSndiT3F3cGdYdVpIwgMA+AMB2AQB+gQAggUVCAESDQoHYXJnbGlzdEICCAUaAggFkAUBsAXgqAFqBG1haW4=
+SOCKS5 proxy is ready.
+2025/10/01 04:59:57 magicsock: derp-7 connected; connGen=1
+2025/10/01 04:59:59 allowing exit node access to local IPs: [127.0.0.0/8]
+2025/10/01 04:59:59 allowing exit node access to local IPs: [127.0.0.0/8]
