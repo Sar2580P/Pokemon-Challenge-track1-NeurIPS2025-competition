@@ -67,9 +67,9 @@ def get_modal_stuff(app_name:str="Modal training"):
         .env({"METAMON_WANDB_ENTITY": "PAC-dataset"})
         .env({"METAMON_CACHE_DIR": "/vol/PAC-dataset"})
         .add_local_dir(
-            local_path="/home/sarvp-srk/Pokemon-Challenge-track1/custom", remote_path="/root/custom"
+            local_path="~/Pokemon-Challenge-track1/custom", remote_path="/root/custom"
         )
-        .add_local_file(local_path="/home/sarvp-srk/Pokemon-Challenge-track1/environment.yml", remote_path="/root/environment.yml")        
+        .add_local_file(local_path="~/Pokemon-Challenge-track1/environment.yml", remote_path="/root/environment.yml")        
         
     )
 
@@ -79,7 +79,9 @@ def get_modal_stuff(app_name:str="Modal training"):
 
 def get_modal_stuff_evaluation(app_name:str="Modal training"):
     import modal
+    from pathlib import Path
     packages=read_yaml('environment.yml')['dependencies'][-1]['pip']
+    HOME_DIR = Path.home()/"Pokemon-Challenge-track1"
 
     image = (
         modal.Image.debian_slim(python_version="3.10")
@@ -98,10 +100,11 @@ def get_modal_stuff_evaluation(app_name:str="Modal training"):
         .run_commands("mkdir /root/metamon2/" , "git clone --recursive https://github.com/Sar2580P/metamon-personal.git /root/metamon2/")
         .run_commands( "mv /root/metamon2/* root")
         .run_commands("cd /root/ && pip install -e .")
-        .pip_install("PySocks")
         
-        .add_local_file("./entrypoint.sh", "/root/entrypoint.sh", copy=True)
+        
+        .add_local_file(HOME_DIR/"entrypoint.sh", "/root/entrypoint.sh", copy=True)
         .run_commands("chmod a+x /root/entrypoint.sh")
+        .pip_install("PySocks")
         
         # 3. SET THE ENTRYPOINT TO RUN THE TAILSCALE SCRIPT FIRST
         # This replaces the default startup command. Your Python function call 
@@ -112,9 +115,9 @@ def get_modal_stuff_evaluation(app_name:str="Modal training"):
         .env({"METAMON_WANDB_ENTITY": "PAC-dataset"})
         .env({"METAMON_CACHE_DIR": "/vol/PAC-dataset"})
         .add_local_dir(
-            local_path="/home/sarvp-srk/Pokemon-Challenge-track1/custom", remote_path="/root/custom"
+            local_path=HOME_DIR/"custom", remote_path="/root/custom"
         )
-        .add_local_file(local_path="/home/sarvp-srk/Pokemon-Challenge-track1/environment.yml", remote_path="/root/environment.yml")
+        .add_local_file(local_path=HOME_DIR/"environment.yml", remote_path="/root/environment.yml")
 
     )
 

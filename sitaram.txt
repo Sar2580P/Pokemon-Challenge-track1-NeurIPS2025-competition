@@ -1,0 +1,8 @@
+Starting  training with MODAL...
+---------------------------------
+🤖 Executing Command:
+modal run custom/gen9/evaluate.py --agent SmallRLGen9Beta --eval_type pokeagent --gens 9 --formats ou --total_battles 50 --checkpoints 18 --avatar lucas --team_set competitive --battle_backend metamon --save_trajectories_to eval_replays --save_team_results_to team_results.csv 
+---------------------------------
+✓ Initialized. View run at https://modal.com/apps/sarvp2486/main/ap-tFClMec4rRGNKb0VvkDSDC
+Stopping app - uncaught exception raised locally: FileNotFoundError('local file /home/sarvagya/Pokemon-Challenge-track1/~/Pokemon-Challenge-track1/environment.yml does not exist').
+✅ Script finished.

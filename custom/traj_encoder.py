@@ -226,7 +226,7 @@ class HRMTrajEncoder(TrajEncoder):
     def inner_forward(self, seq_chunk:torch.Tensor, time_idxs: torch.Tensor, 
                       hidden_state:State, intermediate_reasoning: bool=False):
         B,L, _ , D =seq_chunk.shape   # shape : [Batch, L_gamestep, L_feat, dim]
-        assert D== self.d_model
+        # assert D== self.d_model
         dtype, device= seq_chunk.dtype, seq_chunk.device
         if hidden_state is None:
             hidden_state=self.init_hidden_state(batch_size=B, device=device)

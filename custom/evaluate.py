@@ -234,6 +234,8 @@ class PretrainedModel:
             observation_space=self.observation_space,
             action_space=self.action_space,
         )
+        
+        print(f"Radha raman laal bhajo radhe govinda==> {ckpt_path}")
         # starting the experiment will build the initial model
         experiment.start()
         if ckpt_path is not None:
