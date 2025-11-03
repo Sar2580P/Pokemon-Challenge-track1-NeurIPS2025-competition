@@ -8,7 +8,7 @@ import custom.hrm_agent
 CustomExperiment.agent_type = @hrm_agent.HRM_MultiTaskAgent
 CustomExperiment.tstep_encoder_type = @MetamonTstepEncoder
 CustomExperiment.traj_encoder_type = @traj_encoder.HRMTrajEncoder
-CustomExperiment.max_seq_len = 75   # keep it a multiple of chunk_len
+CustomExperiment.max_seq_len = 100   # keep it a multiple of chunk_len
 
 
 # actor
@@ -45,7 +45,7 @@ MetamonTstepEncoder.dropout = .05
 traj_encoder.HRMTrajEncoder.d_model = 128
 traj_encoder.HRMTrajEncoder.reasoning_tokens = 9
 traj_encoder.HRMTrajEncoder.H_cycles = 4
-traj_encoder.HRMTrajEncoder.L_cycles = 7
+traj_encoder.HRMTrajEncoder.L_cycles = 5
 traj_encoder.HRMTrajEncoder.H_layers = 4
 traj_encoder.HRMTrajEncoder.L_layers = 4
 traj_encoder.HRMTrajEncoder.H_block_type = @H_Block_Config/traj_encoder.HierarchicalReasoningModel_ACTV1Block
@@ -53,7 +53,7 @@ traj_encoder.HRMTrajEncoder.L_block_type = @L_Block_Config/traj_encoder.Hierarch
 traj_encoder.HRMTrajEncoder.M_block_type = @traj_encoder.Mixer
 traj_encoder.HRMTrajEncoder.pos_encoding_type = @layers.RotaryEmbedding
 traj_encoder.HRMTrajEncoder.chunk_atten_type = @layers.ChunkRepresentativeAttention
-traj_encoder.HRMTrajEncoder.chunk_len = 10
+traj_encoder.HRMTrajEncoder.chunk_len = 5
 
 # === Scoped Configuration for H_block ===
 H_Block_Config/traj_encoder.HierarchicalReasoningModel_ACTV1Block.hidden_size = 128

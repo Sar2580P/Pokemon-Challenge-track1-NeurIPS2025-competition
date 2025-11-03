@@ -1,3 +1,5 @@
-import os
+import torch
 
-print(len(os.listdir('data/gen9ou-2024')))
+a= torch.tensor([1,2,4])
+b= a.tolist()*4
+print(b)

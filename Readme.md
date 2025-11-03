@@ -5,6 +5,11 @@ NAME : ```PAC-srsk-1729```
 
 ```export METAMON_CACHE_DIR="PAC-dataset"```
 
+```modal shell --volume my-volume```
+
+
+👁️U👁️
+
 model_ckpts: https://huggingface.co/jakegrigsby/metamon/tree/main
 
 modal volume get pokemon-showdown-gen1 results/HRM_Pokemon_Gen1/ckpts/latest/policy.pt  model_weights.pt

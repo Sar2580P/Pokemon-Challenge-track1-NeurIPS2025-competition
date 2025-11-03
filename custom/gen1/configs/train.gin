@@ -3,9 +3,9 @@ import amago.agent
 
 hrm_agent.HRM_MultiTaskAgent.reward_multiplier = 10.
 hrm_agent.HRM_MultiTaskAgent.tau = .004
-hrm_agent.HRM_MultiTaskAgent.num_actions_for_value_in_critic_loss = 1
-hrm_agent.HRM_MultiTaskAgent.num_actions_for_value_in_actor_loss = 1
-hrm_agent.HRM_MultiTaskAgent.online_coeff = 0.0
+hrm_agent.HRM_MultiTaskAgent.num_actions_for_value_in_critic_loss = 3
+hrm_agent.HRM_MultiTaskAgent.num_actions_for_value_in_actor_loss = 3
+hrm_agent.HRM_MultiTaskAgent.online_coeff = 0     # max-q-rl based 
 hrm_agent.HRM_MultiTaskAgent.offline_coeff = 1.0
 hrm_agent.HRM_MultiTaskAgent.fbc_filter_func = @agent.binary_filter
 
@@ -18,61 +18,88 @@ hrm_agent.HRM_MultiTaskAgent.maximized_critics_component_type = @MaximizedCritic
 hrm_agent.HRM_MultiTaskAgent.target_critic_component_type = @TargetCriticComp/hrm_agent.InitComponent
 hrm_agent.HRM_MultiTaskAgent.target_actor_component_type = @TargetActorComp/hrm_agent.InitComponent
 hrm_agent.HRM_MultiTaskAgent.popart_component_type = @PopartComp/hrm_agent.InitComponent
+hrm_agent.HRM_MultiTaskAgent.teacher_traj_encoder_component_type = @TeacherTrajEncoderComp/hrm_agent.InitComponent
+hrm_agent.HRM_MultiTaskAgent.teacher_actor_component_type = @TeacherActorComp/hrm_agent.InitComponent
+hrm_agent.HRM_MultiTaskAgent.teacher_critic_component_type = @TeacherCriticComp/hrm_agent.InitComponent
+
+CKPT_PATH="results/TrajEncoder_KD_Syn-v2_Gen-1_AC-ADAPT_OFF/ckpts/latest/policy.pt"
+METAMON_CKPT_PATH="synthetic-rl-v2/ckpts/policy_weights/policy_epoch_48.pt"
+INITIALIZE_OTHER_COMP = False
 
 # === Scoped Configuration ===
 TstepComp/hrm_agent.InitComponent.do_init_with_ckpt = True 
-TstepComp/hrm_agent.InitComponent.ckpt_path = "results/HRM_Pokemon_Gen1/ckpts/policy_weights/policy_epoch_0.pt"                    #"synthetic-rl-v2/ckpts/policy_weights/policy_epoch_40.pt"
+TstepComp/hrm_agent.InitComponent.ckpt_path = %METAMON_CKPT_PATH                    #"synthetic-rl-v2/ckpts/policy_weights/policy_epoch_40.pt"
 TstepComp/hrm_agent.InitComponent.component_name = "tstep_encoder" 
 TstepComp/hrm_agent.InitComponent.is_trainable = False 
-TstepComp/hrm_agent.InitComponent.from_hf = False     # where to load the ckpt from 
+TstepComp/hrm_agent.InitComponent.from_hf = True     # where to load the ckpt from 
+
+TeacherTrajEncoderComp/hrm_agent.InitComponent.do_init_with_ckpt = True 
+TeacherTrajEncoderComp/hrm_agent.InitComponent.ckpt_path = %METAMON_CKPT_PATH                   #"synthetic-rl-v2/ckpts/policy_weights/policy_epoch_40.pt"
+TeacherTrajEncoderComp/hrm_agent.InitComponent.component_name = "traj_encoder.tformer" 
+TeacherTrajEncoderComp/hrm_agent.InitComponent.is_trainable = False 
+TeacherTrajEncoderComp/hrm_agent.InitComponent.from_hf = True     # where to load the ckpt from 
 
 
-TrajComp/hrm_agent.InitComponent.do_init_with_ckpt = True 
-TrajComp/hrm_agent.InitComponent.ckpt_path = "results/HRM_Pokemon_Gen1/ckpts/policy_weights/policy_epoch_0.pt"
+TeacherActorComp/hrm_agent.InitComponent.do_init_with_ckpt = True 
+TeacherActorComp/hrm_agent.InitComponent.ckpt_path = %METAMON_CKPT_PATH                    #"synthetic-rl-v2/ckpts/policy_weights/policy_epoch_40.pt"
+TeacherActorComp/hrm_agent.InitComponent.component_name = "teacher_actor" 
+TeacherActorComp/hrm_agent.InitComponent.is_trainable = False 
+TeacherActorComp/hrm_agent.InitComponent.from_hf = True     # where to load the ckpt from 
+
+TeacherCriticComp/hrm_agent.InitComponent.do_init_with_ckpt = True 
+TeacherCriticComp/hrm_agent.InitComponent.ckpt_path = %METAMON_CKPT_PATH                    #"synthetic-rl-v2/ckpts/policy_weights/policy_epoch_40.pt"
+TeacherCriticComp/hrm_agent.InitComponent.component_name = "teacher_critics" 
+TeacherCriticComp/hrm_agent.InitComponent.is_trainable = False 
+TeacherCriticComp/hrm_agent.InitComponent.from_hf = True     # where to load the ckpt from 
+
+TrajComp/hrm_agent.InitComponent.do_init_with_ckpt = %INITIALIZE_OTHER_COMP
+TrajComp/hrm_agent.InitComponent.ckpt_path = %CKPT_PATH
 TrajComp/hrm_agent.InitComponent.component_name = "traj_encoder"
 TrajComp/hrm_agent.InitComponent.is_trainable = True 
 
-ActorComp/hrm_agent.InitComponent.do_init_with_ckpt = True 
-ActorComp/hrm_agent.InitComponent.ckpt_path = "results/HRM_Pokemon_Gen1/ckpts/policy_weights/policy_epoch_0.pt"
+ActorComp/hrm_agent.InitComponent.do_init_with_ckpt = %INITIALIZE_OTHER_COMP  
+ActorComp/hrm_agent.InitComponent.ckpt_path = %CKPT_PATH
 ActorComp/hrm_agent.InitComponent.component_name = "actor"
 ActorComp/hrm_agent.InitComponent.is_trainable = True 
 
-CriticComp/hrm_agent.InitComponent.do_init_with_ckpt = True 
-CriticComp/hrm_agent.InitComponent.ckpt_path = "results/HRM_Pokemon_Gen1/ckpts/policy_weights/policy_epoch_0.pt"
+CriticComp/hrm_agent.InitComponent.do_init_with_ckpt = %INITIALIZE_OTHER_COMP  
+CriticComp/hrm_agent.InitComponent.ckpt_path = %CKPT_PATH
 CriticComp/hrm_agent.InitComponent.component_name = "critics" 
 CriticComp/hrm_agent.InitComponent.is_trainable = True 
 
-MaximizedCriticComp/hrm_agent.InitComponent.do_init_with_ckpt = True 
-MaximizedCriticComp/hrm_agent.InitComponent.ckpt_path = "results/HRM_Pokemon_Gen1/ckpts/policy_weights/policy_epoch_0.pt"
-MaximizedCriticComp/hrm_agent.InitComponent.component_name = "maximized_critics" 
+MaximizedCriticComp/hrm_agent.InitComponent.do_init_with_ckpt = %INITIALIZE_OTHER_COMP  
+MaximizedCriticComp/hrm_agent.InitComponent.ckpt_path = %CKPT_PATH
+MaximizedCriticComp/hrm_agent.InitComponent.component_name = "critics" #"maximized_critics" 
 MaximizedCriticComp/hrm_agent.InitComponent.is_trainable = True 
 
-TargetCriticComp/hrm_agent.InitComponent.do_init_with_ckpt = True 
-TargetCriticComp/hrm_agent.InitComponent.ckpt_path = "results/HRM_Pokemon_Gen1/ckpts/policy_weights/policy_epoch_0.pt"
-TargetCriticComp/hrm_agent.InitComponent.component_name = "target_critics"
+TargetCriticComp/hrm_agent.InitComponent.do_init_with_ckpt = %INITIALIZE_OTHER_COMP  
+TargetCriticComp/hrm_agent.InitComponent.ckpt_path = %CKPT_PATH
+TargetCriticComp/hrm_agent.InitComponent.component_name = "critics"  #"target_critics"
 TargetCriticComp/hrm_agent.InitComponent.is_trainable = True 
 
-TargetActorComp/hrm_agent.InitComponent.do_init_with_ckpt = True 
-TargetActorComp/hrm_agent.InitComponent.ckpt_path = "results/HRM_Pokemon_Gen1/ckpts/policy_weights/policy_epoch_0.pt"
-TargetActorComp/hrm_agent.InitComponent.component_name = "target_actor" 
+TargetActorComp/hrm_agent.InitComponent.do_init_with_ckpt = %INITIALIZE_OTHER_COMP  
+TargetActorComp/hrm_agent.InitComponent.ckpt_path = %CKPT_PATH
+TargetActorComp/hrm_agent.InitComponent.component_name = "actor"    #"target_actor" 
 TargetActorComp/hrm_agent.InitComponent.is_trainable = True 
 
-PopartComp/hrm_agent.InitComponent.do_init_with_ckpt = True 
-PopartComp/hrm_agent.InitComponent.ckpt_path = "results/HRM_Pokemon_Gen1/ckpts/policy_weights/policy_epoch_0.pt"
+PopartComp/hrm_agent.InitComponent.do_init_with_ckpt = %INITIALIZE_OTHER_COMP  
+PopartComp/hrm_agent.InitComponent.ckpt_path = %METAMON_CKPT_PATH
 PopartComp/hrm_agent.InitComponent.component_name = "popart" 
 PopartComp/hrm_agent.InitComponent.is_trainable = True 
+PopartComp/hrm_agent.InitComponent.from_hf = True     # where to load the ckpt from 
 
 
-
-CustomExperiment.l2_coeff = 1e-4
-CustomExperiment.learning_rate = 1.5e-4
+CustomExperiment.start_epoch=0
+CustomExperiment.l2_coeff = 3e-4
+CustomExperiment.learning_rate = 5e-4
 CustomExperiment.grad_clip = 1.5
-CustomExperiment.critic_loss_weight = 10.
-CustomExperiment.lr_warmup_steps = 1000
+CustomExperiment.critic_loss_weight = 3
+CustomExperiment.lr_warmup_steps = 200
 CustomExperiment.mixed_precision = "bf16"
-CustomExperiment.batch_size= 256
-CustomExperiment.batches_per_update = 4 
-CustomExperiment.l2_coeff = 1e-3
-CustomExperiment.wandb_project= "Pokemon-Showdown Challenge"
+CustomExperiment.wandb_project= "Gen-1-Pokemon-Showdown-Challenge"
 CustomExperiment.wandb_entity= "sarvp2486-iit-roorkee"
 CustomExperiment.wandb_group_name= "HRM-integration as traj_encoder"
+
+# knowledge distillation params
+CustomExperiment.kd_action_kl_weight =2
+CustomExperiment.kd_critic_weight =8

@@ -8,7 +8,7 @@ VOL_MOUNT_PATH = pathlib.Path("/vol")
 
 @app.function(
     image=img,
-    gpu="A10", 
+    gpu="A100", 
     timeout=6 * 60 * 60,  # 6 hour timeout
     secrets=[
         modal.Secret.from_name("wandb-secret"),
@@ -38,7 +38,6 @@ def train_model(*arglist):
         RewardFunction,
     )
     from metamon.tokenizer import get_tokenizer
-    from custom.utils import get_env_var
     from custom.experiment import CustomExperiment
 
     import amago
@@ -232,85 +231,3 @@ def train_model(*arglist):
     print(f"🚀 Starting training for {args.epochs} epochs...")
     experiment.learn()
     wandb.finish()
-    
-    
-# Could be used later-->
-# import socket
-# import time
-# import asyncio
-# import websockets
-# async def websocket_smoke_test(port):
-#     """Attempts to connect to the server using WebSockets."""
-#     # NOTE: The path '/showdown/websocket' is a common default for Showdown servers.
-#     uri = f"ws://localhost:{port}/showdown/websocket"
-#     print(f"🔬 Performing WebSocket smoke test on {uri}...")
-#     try:
-#         # We set a common origin header that the server likely expects.
-#         async with websockets.connect(
-#             uri,
-#             origin=f"http://localhost:{port}",
-#             open_timeout=10
-#         ) as websocket:
-#             print("✅ WebSocket smoke test PASSED. Connection established!")
-#             # We can even try to receive the first message
-#             message = await asyncio.wait_for(websocket.recv(), timeout=10)
-#             print(f"Received initial message: {message[:100]}...")
-#     except Exception as e:
-#         print("❌ WebSocket smoke test FAILED.")
-#         print(f"Error: {e}")
-#         # Re-raise the exception to stop the script
-#         raise
-
-
-# def wait_for_server(host: str, port: int, timeout: int = 30):
-#     """
-#     Waits for a network port to become available.
-
-#     Args:
-#         host: The host to check (e.g., 'localhost').
-#         port: The port to check.
-#         timeout: The maximum time to wait in seconds.
-#     """
-#     start_time = time.monotonic()
-#     while True:
-#         try:
-#             with socket.create_connection((host, port), timeout=1):
-#                 print(f"✅ Server is up and listening on port {port}!")
-#                 return
-#         except (ConnectionRefusedError, socket.timeout):
-#             if time.monotonic() - start_time >= timeout:
-#                 raise TimeoutError(f"Server on {host}:{port} did not start within {timeout} seconds.")
-#             print(f"⏳ Server not ready yet. Retrying...")
-#             time.sleep(1)
-
-
-    # PORT = 8000
-    # SERVER_DIRECTORY = "server/pokemon-showdown"
-    # print("🚀 Starting Pokémon Showdown server...")
-    # command = ["node", "pokemon-showdown", "start", "--no-security"]
-    # server_process = subprocess.Popen(command, cwd=SERVER_DIRECTORY)
-    # print(f"✅ Server process started with PID: {server_process.pid}")
-    # try:
-    #     wait_for_server('localhost', PORT, timeout=30)
-    # except TimeoutError as e:
-    #     print(f"❌ {e}")
-        
-    # print("🔬 Performing a smoke test with curl...")
-    # try:
-    #     # We expect this to either succeed or fail fast.
-    #     # The `-I` flag just gets the headers, which is faster.
-    #     curl_command = ["curl", "-I", f"http://localhost:{PORT}"]
-    #     result = subprocess.run(curl_command, timeout=10, check=True, capture_output=True, text=True)
-    #     print("✅ Smoke test PASSED. Server is responding to HTTP requests.")
-    #     print(f"Server Headers:\n{result.stdout}")
-    # except Exception as e:
-    #     print("❌ Smoke test FAILED. The server is not responding correctly.")
-    #     print(f"Error: {e}")
-    #     if hasattr(e, 'stderr'):
-    #         print(f"Curl Stderr: {e.stderr}")
-            
-    # try:
-    #     asyncio.run(websocket_smoke_test(PORT))
-    # except Exception:
-    #     print("❌ WebSocket smoke test FAILED. Stopping the training process.")
-    #     raise RuntimeError("WebSocket smoke test failed.")

@@ -62,7 +62,6 @@ def get_modal_stuff(app_name:str="Modal training"):
         .run_commands("mkdir /root/metamon2/" , "git clone --recursive https://github.com/Sar2580P/metamon-personal.git /root/metamon2/")
         .run_commands( "mv /root/metamon2/* root")
         .run_commands("cd /root/ && pip install -e .")
-
         .env({"METAMON_WANDB_PROJECT": "PAC-dataset"})
         .env({"METAMON_WANDB_ENTITY": "PAC-dataset"})
         .env({"METAMON_CACHE_DIR": "/vol/PAC-dataset"})
@@ -76,25 +75,44 @@ def get_modal_stuff(app_name:str="Modal training"):
     app = modal.App(app_name, image=image)
     return app, image
 
-
-def get_modal_stuff_evaluation(app_name:str="Modal training"):
+def get_modal_stuff_flash_attn(app_name:str="Modal training"):
     import modal
     from pathlib import Path
     packages=read_yaml('environment.yml')['dependencies'][-1]['pip']
     HOME_DIR = Path.home()/"Pokemon-Challenge-track1"
 
     image = (
-        modal.Image.debian_slim(python_version="3.10")
+        modal.Image.from_registry(
+            f"nvidia/cuda:{cuda_tag}",
+            add_python="3.10"
+        )
+        .entrypoint([])
+        
+        # 1. Combined all pip packages into one layer.
+        # This runs first, installing torch, flash-attn, and your deps.
+        .pip_install(["torch"])
+        
+        # 2. Install flash-attn and the rest of your pip dependencies.
+        # flash-attn's setup.py will now find the pre-installed torch.
         .pip_install(
-            list(packages)+['torch']   # gpu based version
+            list(packages) + [
+                "tqdm"            ]
         )
-        .apt_install("curl")
+        .pip_install([
+            "wheel",
+            "setuptools"
+        ])
+        .run_commands("pip install flash-attn --no-build-isolation")
+        .apt_install("nodejs")
+        # 2. Combined all apt packages into one layer
+        .apt_install("git", "screen", "npm",  "curl")
+        
+        # 3. Build amago, now with the fix
         .run_commands(
-        "curl -fsSL https://tailscale.com/install.sh | sh",
-        "tailscale version" # Optional: confirms installation worked
+            "mkdir /root/amago/" , 
+            "git clone https://github.com/UT-Austin-RPL/amago.git /root/amago/"
         )
-        .apt_install("git",  "screen",  "npm",  "nodejs") 
-        .run_commands("mkdir /root/amago/" , "git clone https://github.com/UT-Austin-RPL/amago.git /root/amago/")
+        # *** THE FIX ***
         .run_commands("cd /root/amago && pip install -e .")
         .pip_install("tqdm")
         .run_commands("mkdir /root/metamon2/" , "git clone --recursive https://github.com/Sar2580P/metamon-personal.git /root/metamon2/")
@@ -123,7 +141,6 @@ def get_modal_stuff_evaluation(app_name:str="Modal training"):
 
     app = modal.App(app_name, image=image)
     return app, image
-
 
 
 def add_cli(parser):

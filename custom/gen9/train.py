@@ -1,15 +1,15 @@
-from custom.utils import get_modal_stuff
+from custom.utils import get_modal_stuff, get_modal_stuff_flash_attn
 import modal
 import pathlib
 
 YEAR=2025
-app, img= get_modal_stuff(app_name=f"Metamon_training_gen9ou_{YEAR}")
+app, img= get_modal_stuff_flash_attn(app_name=f"Metamon_training_gen9ou_{YEAR}")
 volume = modal.Volume.from_name(f"pokemon-showdown-gen9ou_{YEAR}", create_if_missing=True)
 VOL_MOUNT_PATH = pathlib.Path("/vol")
 
 @app.function(
     image=img,
-    gpu="A10", 
+    gpu="A100", 
     timeout=6 * 60 * 60,  # 6 hour timeout
     secrets=[
         modal.Secret.from_name("wandb-secret"),
@@ -69,9 +69,6 @@ def train_model(*arglist):
     )
     add_cli(parser)
     args = parser.parse_args(arglist)   # arglist
-    # import os
-    # os.environ["ACCELERATE_USE_TORCH_COMPILE"] = "false"
-    # print(os.environ["ACCELERATE_USE_TORCH_COMPILE"])
             
     print("🤖 Starting the main training process...")
 
@@ -240,8 +237,13 @@ def train_model(*arglist):
     experiment.start()
 
     if args.ckpt is not None:
+        try:
+            idx= int(args.ckpt)
+            args.ckpt = f"PAC-dataset/metamon_models/{args.run_name.lower()}/ckpts/policy_weights/policy_epoch_{idx}.pt"
+        except:  pass
+        args.ckpt=str(VOL_MOUNT_PATH/ args.ckpt)  
         # resume training from a checkpoint
-        experiment.load_checkpoint(args.ckpt)
+        experiment.load_checkpoint_from_path(args.ckpt, is_accelerate_state=False)
     print(f"✅ Checkpoint loaded... ")
     print(f"🚀 Starting training for {args.epochs} epochs...")
     experiment.learn()

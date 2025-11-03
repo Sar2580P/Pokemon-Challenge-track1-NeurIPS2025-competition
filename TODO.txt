@@ -34,9 +34,151 @@
 - Initialize different models for different gen1,9 using pretrained...✅
 
 - Design for opponent modelling
-- Putting reward for accounting that I don't reveal my all the pokemons too early... (it could be ratio of information revealed on both sides)
 - Design for team modelling
 - Look for population based RL training ⚠️
-- Set the gen1 training and improve the config (for both-> gen1,9)
 - Create the inference script for submission using custom model in Pokemon
+
+
+- Look at this Multi-Objective head based training in detail... how is it done in offline mode and how would it work at inference?
+- Look at how data is made and passed through loader ✅
+- Look at how can these heads be designed and how the labels be made, like what stuff available at a step?
+
+
+- Design the architecture of how inference and training look 
+    - at inference , need to store representative states in cache
+- Create a design of how would the opponent modeling look and connect with other parts
+- Look for better actor designs 
+    - currently simple MLP used...
+    - look for something which takes opponent modeling information also...
+
+
+- Data Flow (during training)
+    - TStep Encoder ⬇️
+    - VAE (prior)   ⬇️ 
+    - Value-func    ⬇️  (to get g_ with argmax)
+    - 1st-iter HRM  ⬇️  (on tstep-values)
+    - CVAE          ⬇️  (on history(via self-atten on representative vectors) , to get g^)
+    - 2nd-iter HRM  ⬇️  (concat TStep + self-attn-representative vectors + g)  , where g= g_*I(n<eps) + g^*I(n>eps)
+    - Actor-Critic  ⬇️  (as usual)
+
+    - Value-func should be matched against the Critic (averaged over action)
+
+- Data Flow (during inference)
+    - TStep Encoder  ⬇️
+    - 1st-iter HRM   ⬇️ 
+    - CVAE           ⬇️
+    - 2nd-iter HRM   ⬇️
+    - Actor          ⬇️
+
+Tasks : 
+- Create a VAE architecture and train to use it as prior  ✅
+- Create architectures for CVAE and Value-func   ✅
+- Create script for training VAE for Gen-1,9
+- Create script for training opponent modeling ✅
+- Create gin files for each  ✅
+- Extrapolate to Gen-1 for opponent modeling   ✅
+- Improve the architecture of VAE (prior):
+    - params adjustemnt
+    - ckpt saving   ✅
+    - better architecture   ✅
+- Re-think for opponent modeling flow of execution
+- Implement the switching logic in the CVAE  ✅
+
+- Read and understand all the metrics ... ✅
+- Understand how can things be stablised for gen-9 (too much zig-zag)  ✅
+
+- Understand various scenarios like binary-rl , binary-maxq-rl ... etc...
+- See if ckpt is really loaded while inferencing ... as our trained model is performaning just as good as random... 
+    - correct the hidden state logic in HRM
+- Correct the selector loss (its in several thousands)  ✅
+
+- Improve the architecture of Actor/Critic (make it non-linear)   
+- Change the filter cloning from binary to exponential (normalize the advantages)   ⭐
+- Read about the Q-learning setup and challenges from stanford slides  ✅
+- Read the full architecture of metamon  ✅
+
+_____________
+
+
+GEN-1 Metric Understanding
+- ANOMALY ==>
+    - Maximum Action Logprob : flat line (-0.00804) | expected: to be increasing as training progresses
+
+    
+Suspects of Action Space Collapse==>
+- The traj-encoder is unstable 
+    - look for normalization issues   ✅
+- The critic weight loss is high
+    - leads to fast chasing of target
+- See how to log the entropy, TD error based metrics etc...    ✅
+    - for inspecting model collapse
+
+
+- Implement critic based gamma ensembling
+
+
+- Draw the chunk attn module  ✅
+- Think how evaluation or inference would work
+- A lot of the replay dataset available, how to make use of it to finetune original model
+- Think about what can be done to existing model as it is to improve the performance ✅
+- Look for distillation methods
+
+- The 2nd inner forward should not loop through
+- do loggings to find why the actor critic not learning ...
+
+TASKS ==>
+- set the abra to train, also the HRM model
+- check for errors in the ensemble approach  ✅
+- set the opponent playing stage for testing for best hparams
+- design the scheme for 1step planning
+
+________________________________________________________________________
+
+
+3/3         0
+4/10        6          # q-value top-p sampling
+3/5    10   2    8
+3/5    13   2    10
+5/5    18   0    10
+1/5    19   4    14    # top p sampling based
+5/5    24   0    14    # 46
+2/5    26   3    17    # 46
+4/5    30   1    18    # 46 
+4/5    34   1    19    # 46   
+4/5    39   1    20    # 46 
+4/5    43   1    21    # 46 
+2/5    45   3    24    # 44
+1/5    46   1    28    # 48
+4/5    50   1    29    # 46
+
+________________________________________________________________________
+
+
+
+Tasks -->
+- train some model which can give the possible teams based on the partial members revealed
 - 
+
+
+- Complete the lr code  ✅
+- integrate to also include done  ✅
+- implement interact to get the past rewards  ✅
+- run everyhting end to end to look for errors ✅
+- play against heuristics and the syn-rl v2
+- Things to update during done ==>
+    - td error
+    - G 
+    - policy weights
+    
+
+________________________________________________________________________
+
+0/1    0     1    1
+1/3    1     2    3
+2/3    3     1    4
+2/5    5     3    7
+0/5    5     3    12
+0/1    5     1    13
+0/1    5     1    14
+0/1    5     1    15
+0/1    5     1    16

@@ -1,7 +1,0 @@
-Made PokeAgent Ladder Env
-2025-09-27 08:25:18,186 - PAC-srsk-1729 - WARNING - Popup message received: |popup||html|Your IP (34.125.150.89) is currently locked due to being a proxy. We automatically lock these connections since they are used to spam, hack, or otherwise attack our server. Disable any proxies you are using to connect to PS.
-
-<a href="view-help-request--appeal"><button class="button">Help me with a lock from a proxy</button></a>
-2025-09-27 08:25:18,187 - PAC-srsk-1729 - WARNING - Trying to login as PAC-srsk-1729, showdown returned ‽PAC-srsk-1729 - this might prevent future actions from this agent. Changing the agent's username might solve this problem.
-2025-09-27 08:25:18,784 - PAC-srsk-1729 - WARNING - Received pm: |pm|‽PAC-srsk-1729|~|/raw <img src="https://play.pokemonshowdown.com/sprites/trainers/lucas.png" alt="lucas" width="80" height="80" class="pixelated" style="vertical-align:middle;"/>
-⠙ Running (1/1 containers active)... View app at https://modal.com/apps/sarvp2486/main/ap-NobKS4sdtbQTFKDvX6Cu2X^Z

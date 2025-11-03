@@ -257,6 +257,19 @@ class HRM_gen1ou(PretrainedModel):
         )
 
 @pretrained_model()
+class HRM_gen1ou_OpponentModeling(PretrainedModel):
+    def __init__(self):
+        super().__init__(
+            model_name="hrm_gen1ou",
+            model_gin_config_path="custom/gen1/configs/opponent_modeling_hrm_agent.gin",
+            train_gin_config_path="custom/gen1/configs/opponent_modeling_train.gin",
+            action_space=MinimalActionSpace(),
+            reward_function=DefaultShapedReward(),
+            observation_space=DefaultObservationSpace(), 
+            tokenizer=get_tokenizer(choice="allreplays-v3")
+        )
+
+@pretrained_model()
 class HRM_gen9ou_ABRA(PretrainedModel):
     def __init__(self):
         super().__init__(
@@ -269,8 +282,41 @@ class HRM_gen9ou_ABRA(PretrainedModel):
             tokenizer=get_tokenizer(choice="DefaultObservationSpace-v1")
         )
 
+@pretrained_model()
+class HRM_gen9ou_ABRA_OpponentModeling(PretrainedModel):
+    def __init__(self):
+        super().__init__(
+            model_name="hrm_gen9ou_abra_opponent_modeling",
+            model_gin_config_path="custom/gen9/configs/opponent_modeling_hrm_agent.gin",
+            train_gin_config_path="custom/gen9/configs/opponent_modeling_train.gin",
+            action_space=DefaultActionSpace(),
+            reward_function=DefaultShapedReward(),
+            observation_space=TeamPreviewObservationSpace(), 
+            tokenizer=get_tokenizer(choice="DefaultObservationSpace-v1")
+        )
+
+@pretrained_model()
+class SyntheticRLV2(PretrainedModel):
+    def __init__(self):
+        super().__init__(
+            model_name="synthetic-rl-v2",
+            model_gin_config_path="custom/gen1/configs/synthetic_multiaskagent.gin",
+            train_gin_config_path="metamon/rl/configs/training/binary_rl.gin",
+            action_space=MinimalActionSpace()
+        )
 
 
+@pretrained_model()
+class SyntheticRLV1(PretrainedModel):
+    def __init__(self):
+        super().__init__(
+            model_name="synthetic-rl-v1",
+            model_gin_config_path="metamon/rl/configs/models/synthetic_agent.gin",
+            train_gin_config_path="metamon/rl/configs/training/binary_rl.gin",
+            # default_checkpoint=40,
+            action_space=MinimalActionSpace(),
+        )
+        
 HEURISTIC_COMPOSITE_BASELINES = [
     "PokeEnvHeuristic",
     "Gen1BossAI",
