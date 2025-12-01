@@ -317,6 +317,24 @@ class SyntheticRLV1(PretrainedModel):
             action_space=MinimalActionSpace(),
         )
         
+@pretrained_model() 
+class Abra(PretrainedModel):
+
+    def __init__(self):
+        super().__init__(
+            model_name="abra",
+            model_gin_config_path="custom/gen9/configs/medium_multitaskagent.gin",
+            train_gin_config_path="custom/gen9/configs/training/binary_rl.gin",
+            # default_checkpoint=40,
+            action_space=DefaultActionSpace(),
+            observation_space=TeamPreviewObservationSpace(),
+            tokenizer=get_tokenizer("DefaultObservationSpace-v1"),
+            gin_overrides={
+                "amago.nets.traj_encoders.TformerTrajEncoder.attention_type": amago.nets.transformer.FlashAttention,
+                "amago.nets.transformer.FlashAttention.window_size": (32, 0),
+            },
+        )
+        
 HEURISTIC_COMPOSITE_BASELINES = [
     "PokeEnvHeuristic",
     "Gen1BossAI",

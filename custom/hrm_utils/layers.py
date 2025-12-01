@@ -327,6 +327,7 @@ class ChunkRepresentativeAttentionBlock(nn.Module):
         final_output_flat = residual_ffn + ffn_output
 
         return final_output_flat
+
     
 @gin.configurable()
 class ChunkRepresentativeAttention(nn.Module):

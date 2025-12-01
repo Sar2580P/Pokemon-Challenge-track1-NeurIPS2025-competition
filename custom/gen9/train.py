@@ -234,16 +234,24 @@ def train_model(*arglist):
         print("✅")
     else: print("ℹ️ Metamon dataset already present, skipping download.")
     
+    # set rating
+    amago_dataset.parsed_replay_dset.min_rating = args.min_rating
+    amago_dataset.parsed_replay_dset.max_rating = args.max_rating
+    
     experiment.start()
 
     if args.ckpt is not None:
         try:
             idx= int(args.ckpt)
-            args.ckpt = f"PAC-dataset/metamon_models/{args.run_name.lower()}/ckpts/policy_weights/policy_epoch_{idx}.pt"
-        except:  pass
-        args.ckpt=str(VOL_MOUNT_PATH/ args.ckpt)  
-        # resume training from a checkpoint
-        experiment.load_checkpoint_from_path(args.ckpt, is_accelerate_state=False)
+            if idx!=-1:
+                args.ckpt = f"PAC-dataset/metamon_models/{args.run_name.lower()}/ckpts/policy_weights/policy_epoch_{idx}.pt"
+            else:
+                args.ckpt = f"results/ABRA_elo(1750, 2250)/ckpts/policy_weights/policy_epoch_0.pt"
+            args.ckpt=str(VOL_MOUNT_PATH/ args.ckpt)  
+            # resume training from a checkpoint
+            experiment.load_checkpoint_from_path(args.ckpt, is_accelerate_state=False)
+        except Exception as e:  
+            print(f"❌ Skipping ckpt initialization...\nERROR: {e}")
     print(f"✅ Checkpoint loaded... ")
     print(f"🚀 Starting training for {args.epochs} epochs...")
     experiment.learn()

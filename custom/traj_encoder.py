@@ -134,6 +134,7 @@ class State:
     zL: torch.Tensor   
     temporal_buffer: torch.Tensor = None  # only for inference-mode
     curr_inference_step: torch.Tensor = None   # only for inference-mode
+    chunk_counter:torch.Tensor=None
     @classmethod
     def create(cls, zH_shape, zL_shape, device, dtype=torch.float32, for_inference:bool=True):      
         zH = trunc_normal_init_(torch.empty(zH_shape, dtype=dtype, device=device), std=1)
@@ -147,9 +148,11 @@ class State:
             temporal_buffer=torch.zeros(size=(batch_size, total_buffer_len,  reasoning_tokens, d_model), 
                                        device=device, dtype=dtype)
             curr_inference_step=torch.zeros(size=(batch_size,), device=device, dtype=torch.int8)
+            chunk_counter=torch.zeros(size=(batch_size,), device=device, dtype=torch.int8)
             return cls(zH=zH, zL=zL, 
                        temporal_buffer=temporal_buffer, 
-                       curr_inference_step=curr_inference_step)
+                       curr_inference_step=curr_inference_step, 
+                       chunk_counter=chunk_counter)
         return cls(zH=zH, zL=zL)
     
     def reset(self, dones: np.ndarray):
@@ -178,6 +181,7 @@ class State:
         # reset the temporal buffer to zeros for these indices
         self.temporal_buffer[dones] = torch.zeros_like(self.temporal_buffer[dones]) 
         self.curr_inference_step[dones] = 0 
+        self.chunk_counter[dones]=0
 
 class ResidualBlock(nn.Module):
     def __init__(self, channels: int, kernel_size: int = 3):
@@ -205,8 +209,13 @@ class VAE_Prior(nn.Module):
         channel_dims: List[int] = [128, 256, 512], 
         # --- Self-contained training arguments ---
         learning_rate: float = 1e-4,
-        beta: float = 1.0,
         gradient_accumulation_steps: int = 1,
+        
+        # === KL Annealing Parameters ===
+        kl_anneal_start_step: int = 1000, # Start annealing after 1000 steps
+        kl_anneal_end_step: int = 5000,   # Beta reaches 1.0 at step 5000
+        kl_anneal_max_beta: float = 1.0,
+        # ==============================
     ):
         super().__init__()
         self.num_tokens = num_tokens
@@ -269,7 +278,9 @@ class VAE_Prior(nn.Module):
         self.decoder = nn.Sequential(*decoder_layers)
 
         # --- Training and state management ---
-        self.beta = beta
+        self.target_beta = kl_anneal_max_beta # Renamed for clarity
+        self.kl_anneal_start_step = kl_anneal_start_step
+        self.kl_anneal_end_step = kl_anneal_end_step
         self.gradient_accumulation_steps = gradient_accumulation_steps
         self.global_step = 0
         self.optimizer = torch.optim.Adam(self.parameters(), lr=learning_rate)
@@ -300,12 +311,26 @@ class VAE_Prior(nn.Module):
         z = self.reparameterize(mu, logvar)
         return self.decode(z), mu, logvar
 
+    def get_current_beta(self):
+        """Calculates the current beta value based on the global step and annealing schedule."""
+        if self.global_step < self.kl_anneal_start_step:
+            current_beta = 0.0
+        elif self.global_step >= self.kl_anneal_end_step:
+            current_beta = self.target_beta
+        else:
+            # Linear ramp-up
+            step_progress = max(1, (self.global_step - self.kl_anneal_start_step) / \
+                            (self.kl_anneal_end_step - self.kl_anneal_start_step))
+            current_beta = self.target_beta * step_progress
+        return current_beta
+
     def compute_loss(self, reconstructed_o, o_, mu, logvar, vae_mask):
         B = vae_mask.shape[0]
+        current_beta = self.get_current_beta()
         recon_loss_unmasked = F.mse_loss(reconstructed_o.reshape(B, -1), o_.reshape(B, -1), reduction="none")
         recon_loss = (recon_loss_unmasked * vae_mask.view(B, -1)).sum() / vae_mask.sum()
         kl_div = -0.5 * torch.mean(torch.sum(1 + logvar - mu.pow(2) - logvar.exp(), dim=1))
-        total_loss = recon_loss + self.beta * kl_div
+        total_loss = recon_loss + current_beta * kl_div
         return {"total": total_loss, "recon": recon_loss, "kl": kl_div}
 
     def train_step(self, o_, vae_mask, save_every_n_steps: int, save_dir:str):
@@ -528,8 +553,7 @@ class HRMTrajEncoder(TrajEncoder):
         return State.create(zH_shape=size, zL_shape=size, device=device, for_inference=for_inference)
     
     def inner_forward_temporal(self, seq_chunk:torch.Tensor, time_idxs: torch.Tensor, 
-                      m_model:nn.Module, h_model:nn.Module , l_model:nn.Module, 
-                      hidden_state:State=None, intermediate_reasoning: bool=False):
+                                hidden_state:State=None):
         B,L, _ , D =seq_chunk.shape   # shape : [Batch, L_gamestep, L_feat, dim]
         # assert D== self.d_model
         dtype, device= seq_chunk.dtype, seq_chunk.device
@@ -538,15 +562,13 @@ class HRMTrajEncoder(TrajEncoder):
             hidden_state=self.init_hidden_state(batch_size=B, device=device, for_inference=False)
         zL, zH=hidden_state.zL.to(dtype=dtype), hidden_state.zH.to(dtype=dtype)
         time_embeddings = self.time_embedder(time_idxs).unsqueeze(2)
-        if intermediate_reasoning:
-            temporal_reasoning=torch.zeros(size=(B, L, self.reasoning_tokens, D), 
-                                           device=seq_chunk.device, dtype=seq_chunk.dtype)
-        else: 
-            temporal_reasoning=torch.zeros(size=(B, L, D), 
-                                           device=seq_chunk.device, dtype=seq_chunk.dtype)
+        temporal_reasoning=torch.zeros(size=(B, L, self.reasoning_tokens, D), 
+                                        device=seq_chunk.device, dtype=seq_chunk.dtype)
         seq_info = dict(
             cos_sin=self.rotary_emb() if hasattr(self, "rotary_emb") else None,
         )
+        
+        m_model, h_model, l_model =self.M_model_BTS, self.H_model_BTS ,self.L_model_BTS
         # with torch._dynamo.disable():
         for t in range(L):   # at inference L=1 ... but during training L=# total gamesteps
             x, time_step_embedding=seq_chunk[:, t, :, :], time_embeddings[:, t,:, :]
@@ -565,16 +587,13 @@ class HRMTrajEncoder(TrajEncoder):
             zL = l_model(hidden_states=zL, input_injection=zH_, **seq_info)
             zH = h_model(hidden_states=zH, input_injection=zL, **seq_info)
 
-            if intermediate_reasoning: temporal_reasoning[:, t, :, :] = zH 
-            else: 
-                temporal_reasoning[:, t, :] = torch.mean(zH, dim=-2)     # aggregating reasoning tokens TODO : implement attn based aggregation
+            temporal_reasoning[:, t, :, :] = zH 
             zH, zL = zH.detach(), zL.detach()
         return temporal_reasoning, hidden_state
     
     
 
     def inner_forward(self, seq_chunk:torch.Tensor, time_idxs: torch.Tensor, 
-                      m_model:nn.Module, h_model:nn.Module , l_model:nn.Module, 
                       hidden_state:State=None):
         B,R, D =seq_chunk.shape   # shape : [Batch, L_gamestep, L_feat, dim]
         assert D== self.d_model
@@ -588,6 +607,8 @@ class HRMTrajEncoder(TrajEncoder):
             cos_sin=self.rotary_emb() if hasattr(self, "rotary_emb") else None,
         )
         x = torch.cat([seq_chunk, time_embeddings], dim=1)
+        
+        m_model, h_model, l_model =self.M_model_ATS, self.H_model_ATS , self.L_model_ATS
         with torch.no_grad():
             for _H_step in range(self.H_cycles):
                 zH_ = m_model(zH=zH, x=x, **seq_info)
@@ -619,44 +640,58 @@ class HRMTrajEncoder(TrajEncoder):
         
         seq= self.inp_norm(seq)
                 
-        if hidden_state is not None:
+        if hidden_state is not None:   # INFERENCE
+            
+            '''
+            STEP-1: Pass through 'inner_forward_temporal', with hidden state, if representative -> save in cache
+            STEP-2: Representative Chunk Attn
+                - get the cached representatives with padding (on right)
+                - send it to chunk-atten module
+                - use batch indexing to pick the past summary causally
+            STEP-3: Pass through 'inner_forward' with all concatenated like : summary, seq, etc...  
+            STEP-4: Store the current chunk representative (if it is) and update chunk_counter        
+            '''
+            
             time_idxs=time_idxs[:, :, -1]   # [batch, 1, 1] -> [batch, 1]
-            total_buffer_len=hidden_state.temporal_buffer.shape[1]
             representative_interval=5
-                        
-            temporal_reasoning, hidden_state = self.inner_forward(seq_chunk=seq, time_idxs=time_idxs,     # temporal_reasoning: [Batch, 1, reasoning_tokens, self.d_model]
-                                                                hidden_state=hidden_state, 
-                                                                intermediate_reasoning=True)
+            temporal_buffer= hidden_state.temporal_buffer   
             
-            # store the temporal reasoning at idx= curr_inference_step//representative_interval
-            temporal_buffer= hidden_state.temporal_buffer    # [B, total_buffer_len, reasoning_tokens, self.d_model]
-            # for a specific batch idx, store the temporal reasoning at
-            # idx= curr_inference_step//representative_interval
-            
-            # Change dtype to torch.long for both index tensors
+            # STEP-1 
+            chunked_reasoning_local, hidden_state = self.inner_forward_temporal(seq_chunk=seq, time_idxs=time_idxs,     # temporal_reasoning: [Batch, 1, reasoning_tokens, self.d_model]
+                                                                                hidden_state=hidden_state)
+            # STEP-2
+            temporal_summary = self.chunk_attn(temporal_buffer)
             batch_indices = torch.arange(B, device=temporal_buffer.device, dtype=torch.long)
-            seq_indices = torch.clamp(
-                hidden_state.curr_inference_step // representative_interval, 
-                max=total_buffer_len - 1
-            ).to(torch.long) # Use .to(torch.long) here
+            recent_representative_idx= (hidden_state.chunk_counter-1).to(torch.long)
+            summary = temporal_summary[batch_indices, recent_representative_idx, :, :].unsqueeze(1)    #expand dim for temporal dim
 
-            temporal_buffer[batch_indices, seq_indices, :, :] = temporal_reasoning[:, -1, :, :].to(temporal_buffer.dtype)
-            hidden_state.temporal_buffer= temporal_buffer
+            # there would be some in batch, for which recent_representative_idx=-1
+            invalid_mask = (hidden_state.chunk_counter == 0)
+            if torch.any(invalid_mask):
+                summary[invalid_mask] = 0.0
+                        
+            updated_reasoning_tokens = summary.shape[2]
+            summary = self.temporal_summary_norm(summary)    # as the input seq is normed
+            
+            # STEP-3
+            seq = torch.cat([seq, summary, chunked_reasoning_local], dim=-2)
+            seq = einops.rearrange(seq, 'bn c r d -> (bn c) r d')
+            time_idxs = einops.rearrange(time_idxs, 'b c -> (b c)')
+            final_reasoning , _ = self.inner_forward(seq_chunk=seq, time_idxs=time_idxs)
+
+            final_reasoning= einops.rearrange(final_reasoning, '(b c) d -> b c d', b=B)    # Merge chunks, aggregate over reasoning dimension...
+            
+            # STEP-4
             hidden_state.curr_inference_step+=1
-            
-            # Do chunk attention on the entire buffer
-            temporal_summary = self.chunk_attn(temporal_buffer)     # shape ==> [B, total_buffer_len, reasoning_tokens, self.d_model]
-            # shift the temporal summary by 1 step to the right by padding zero at start
-            summary_for_prev_chunk = temporal_summary[:, :-1, :, :] # Get summaries for chunks 0 to N-1
-            zero_summary = torch.zeros_like(summary_for_prev_chunk[:, :1, :, :]) # Create a placeholder for the first chunk
-            shifted_summary = torch.cat([zero_summary, summary_for_prev_chunk], dim=1)
-            summary = shifted_summary[batch_indices, seq_indices, :, :].unsqueeze(1)    # [B, 1, s, d]
-            summary= self.temporal_summary_norm(summary)    # as the input seq is normed
-            # STEP-4: Use this final_summary as new input-seq
-            seq = torch.cat([seq, summary], dim=-2)
-            
-            final_temporal_reasoning, _ = self.inner_forward(seq_chunk=seq, time_idxs=time_idxs)
-            return final_temporal_reasoning, hidden_state            
+            mask = hidden_state.curr_inference_step%representative_interval == 0
+            if torch.any(mask):
+                batch_indices, buffer_indices = torch.where(mask)[0].to(torch.long)  , hidden_state.chunk_counter[mask].to(torch.long)
+                representative = chunked_reasoning_local[mask] 
+                hidden_state.temporal_buffer[batch_indices, buffer_indices] = representative.squeeze()
+                
+                hidden_state.chunk_counter[mask] += 1
+            return final_reasoning , hidden_state
+               
             
         extra_pad_len = self.chunk_len - (L%self.chunk_len)  if L%self.chunk_len>0 else 0
         if extra_pad_len>0 :
@@ -679,8 +714,7 @@ class HRMTrajEncoder(TrajEncoder):
         time_idxs_chunked = time_idxs.view(B, num_chunks, self.chunk_len)
         time_idxs_chunked = time_idxs_chunked.reshape(-1, self.chunk_len)
         chunked_reasoning_local, _ = self.inner_forward_temporal(seq_chunk=seq_chunked, time_idxs=time_idxs_chunked, 
-                                                        m_model=self.M_model_BTS, h_model=self.H_model_BTS , l_model=self.L_model_BTS,
-                                                        hidden_state=hidden_state, intermediate_reasoning=True)
+                                                        hidden_state=hidden_state)
         
         # STEP-2: Get the representative zH from each chunk
         representatives = chunked_reasoning_local[:, -1, :, :]    # shape: [B*num_chunks, chunk_len, reasoning_tokens, D]
@@ -704,9 +738,7 @@ class HRMTrajEncoder(TrajEncoder):
         seq_chunked = einops.rearrange(seq_chunked, 'bn c r d -> (bn c) r d')
         time_idxs_chunked = einops.rearrange(time_idxs_chunked, 'bn c -> (bn c)')
 
-        final_reasoning , _ = self.inner_forward(seq_chunk=seq_chunked, time_idxs=time_idxs_chunked, 
-                                                m_model=self.M_model_ATS, h_model=self.H_model_ATS , l_model=self.L_model_ATS,
-                                                hidden_state=hidden_state)
+        final_reasoning , _ = self.inner_forward(seq_chunk=seq_chunked, time_idxs=time_idxs_chunked)
         
         # STEP-5: Merge chunks, aggregate over reasoning dimension...
         final_reasoning= einops.rearrange(final_reasoning, '(b n c) d -> b (n c) d', b=B, n=num_chunks)
@@ -731,6 +763,7 @@ class HRMTrajEncoder(TrajEncoder):
         assert time_idxs is not None
         B,L, Z , D =seq.shape   # shape : [Batch, L_gamestep, L_feat, dim]
         if hasattr(self, "inp"): seq= self.inp(seq)
+        seq= self.inp_norm(seq)
         
         if hidden_state is not None:
             time_idxs=time_idxs[:, :, -1]   # [batch, 1, 1] -> [batch, 1]
@@ -776,24 +809,24 @@ class HRMTrajEncoder(TrajEncoder):
             temporal_reasoning, hidden_state = self.inner_forward(seq_chunk=seq, time_idxs=time_idxs, hidden_state=hidden_state)
             return torch.zeros_like(temporal_reasoning), hidden_state            
             
-        
+        dev= vae_prior_latents.device
         B_, L_ ,_, D_latent = vae_prior_latents.shape
         assert B==B_ and L==L_ and (time_idxs is not None)
 
         extra_pad_len = self.chunk_len - (L%self.chunk_len)  if L%self.chunk_len>0 else 0
         if extra_pad_len>0 :
             if not hasattr(self, "pad_embedding"):
-                pad_embedding = torch.mean(seq[:, -1, :, :], dim=0).unsqueeze(0).detach()
-                self.pad_embedding=pad_embedding.expand(B, -1, -1).unsqueeze(1)
+                # as we are rejecting the temporal summary for very last chunk in full seq, we can simply initialize it as 0
+                self.pad_embedding =  torch.zeros(size=(B, 1, Z, self.d_model)).to(seq.device)     #torch.mean(seq[:, -1, :, :], dim=0).unsqueeze(0).detach()
             
             pad_embedding=self.pad_embedding.expand(-1, extra_pad_len, -1, -1)
             seq=torch.cat([seq, pad_embedding], dim=1)
             t= torch.Tensor([MAGIC_PAD_VAL]*extra_pad_len).unsqueeze(0)
             t=t.expand(B, -1).unsqueeze(2)
             time_idxs=torch.cat([time_idxs, t.to(device=time_idxs.device)], dim=1).long()
-            
+
             # do padding for vae_prior_latents (batch, seq-len, 1, latent-dim): 
-            vae_prior_latents=torch.cat([vae_prior_latents, torch.zeros(size=(B, extra_pad_len, 1, D_latent)).to(vae_prior_latents.device)], dim=1)
+            vae_prior_latents=torch.cat([vae_prior_latents, torch.zeros(size=(B, extra_pad_len, 1, D_latent)).to(dev)], dim=1)
 
         # STEP-1: chunk the game steps...  
         D=self.d_model
@@ -806,8 +839,8 @@ class HRMTrajEncoder(TrajEncoder):
         time_idxs_chunked = time_idxs.view(B, num_chunks, self.chunk_len)
         time_idxs_chunked = time_idxs_chunked.reshape(-1, self.chunk_len)
 
-        chunked_reasoning_local, _ = self.inner_forward(seq_chunk=seq_chunked, time_idxs=time_idxs_chunked,
-                                                               hidden_state=hidden_state, intermediate_reasoning=True)
+        chunked_reasoning_local, _ = self.inner_forward_temporal(seq_chunk=seq_chunked, time_idxs=time_idxs_chunked,
+                                                               hidden_state=hidden_state)
         
         # STEP-2: Get the representative zH from each chunk
         representatives = chunked_reasoning_local[:, -1, :, :]    # shape: [B*num_chunks, chunk_len, reasoning_tokens, D]
@@ -821,16 +854,16 @@ class HRMTrajEncoder(TrajEncoder):
         shifted_summary = torch.cat([zero_summary, summary_for_prev_chunk], dim=1) # Shape: [B, num_chunks, ...]
 
         # STEP-4: Broadcast and combine for the second, definitive pass
-        summary = shifted_summary.view(-1, 1, self.reasoning_tokens, self.d_model) # Reshape to [B*num_chunks, ...]
-        summary = summary.expand(-1, self.chunk_len, -1, -1)
+        updated_reasoning_tokens = shifted_summary.shape[2]
+        summary = shifted_summary.view(-1, 1, updated_reasoning_tokens, self.d_model) # Reshape to [B*num_chunks, ...]
+        summary = self.temporal_summary_norm(summary.expand(-1, self.chunk_len, -1, -1))
         
         # summary = temporal_summary.view(-1, 1, self.reasoning_tokens, self.d_model)    
         # summary = summary.expand(-1, self.chunk_len, -1, -1)   
 
         # # STEP-4: Use this final_summary as new input-seq
-        seq_chunked = torch.cat([seq_chunked, summary], dim=-2)
-        
-        
+        seq_chunked = torch.cat([seq_chunked, summary, chunked_reasoning_local], dim=-2)
+ 
         # STEP-5: Get the opponent latent
         if self.cvae is not None:
             seq_chunked_flattened = rearrange( 
@@ -899,12 +932,12 @@ class HRMTrajEncoder(TrajEncoder):
         else: 
             recons_loss, mu, logvar =None, None, None     
             
-        final_reasoning , _ = self.inner_forward(seq_chunk=seq_chunked, time_idxs=time_idxs_chunked, 
-                                            hidden_state=hidden_state)
-        
+        seq_chunked = einops.rearrange(seq_chunked, 'bn c r d -> (bn c) r d')
+        time_idxs_chunked = einops.rearrange(time_idxs_chunked, 'bn c -> (bn c)')
+        final_reasoning , _ = self.inner_forward(seq_chunk=seq_chunked, time_idxs=time_idxs_chunked)
+                                            
         # STEP-5: Merge chunks, aggregate over reasoning dimension...
-        final_reasoning = final_reasoning.view(B, -1, self.chunk_len , self.d_model)
-        final_reasoning = final_reasoning.reshape(B, -1, self.d_model)
+        final_reasoning= einops.rearrange(final_reasoning, '(b n c) d -> b (n c) d', b=B, n=num_chunks)
         
         # STEP-6: Removing the pad embedding created...
         if extra_pad_len>0:

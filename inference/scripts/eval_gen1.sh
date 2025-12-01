@@ -8,10 +8,10 @@
 PYTHON_SCRIPT="inference/play_battle/gen1.py"
 
 AGENT="SyntheticRLV2"   # DO NOT CHANGE THIS...
-EVAL_TYPE="heuristic"    # Choices: "heuristic", "il", "ladder", "pokeagent"
+EVAL_TYPE="pokeagent"    # Choices: "heuristic", "il", "ladder", "pokeagent"
 GENS="1" 
 FORMATS="ou"
-TOTAL_BATTLES=1
+TOTAL_BATTLES=10
 TEAM_SET="competitive"
 AVATAR="lucas"
 

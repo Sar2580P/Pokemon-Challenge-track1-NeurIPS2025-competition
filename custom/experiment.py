@@ -220,7 +220,7 @@ class CustomExperiment(MetamonAMAGOExperiment):
                 episodes_finished += done.sum()
             obs, rl2s, time_idxs = get_t()
             hidden_state = policy.traj_encoder.reset_hidden_state(hidden_state, done)
-            print(done, done.shape, type(done) , "\n\n\n")
+
             if render:
                 envs.render()
             if episodes is not None and episodes_finished >= episodes:

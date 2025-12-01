@@ -529,7 +529,11 @@ class HRM_MultiTaskAgent(MultiTaskAgent):
             if state_dict_prefix != "":
                 state_dict={k.replace(f"{state_dict_prefix}.", '', 1):v for k,v in ckpt.items() if k.startswith(state_dict_prefix)}
             else: state_dict=ckpt 
-            component.load_state_dict(state_dict)
+            try:
+                component.load_state_dict(state_dict)
+            except: 
+                component.load_state_dict(state_dict, strict=False)
+                print(f"🚨 PARTIAL (missing keys): {component_name} initialization from ckpt ({ckpt_path}).")
             print(f"✅ SUCCESS: {component_name} initialized from ckpt ({ckpt_path})")
         except Exception as e: 
             print(f"😥 FAILED: {component_name} initialization from ckpt ({ckpt_path}).\nERROR: {e}")

@@ -1,0 +1,94 @@
+import custom.hrm_agent
+import amago.agent
+
+hrm_agent.HRM_MultiTaskAgent.reward_multiplier = 10.
+hrm_agent.HRM_MultiTaskAgent.tau = .004
+hrm_agent.HRM_MultiTaskAgent.num_actions_for_value_in_critic_loss = 3
+hrm_agent.HRM_MultiTaskAgent.num_actions_for_value_in_actor_loss = 3
+hrm_agent.HRM_MultiTaskAgent.online_coeff = 0.25
+hrm_agent.HRM_MultiTaskAgent.offline_coeff = 1.0
+hrm_agent.HRM_MultiTaskAgent.fbc_filter_func = @agent.binary_filter
+
+
+hrm_agent.HRM_MultiTaskAgent.tstep_component_type = @TstepComp/hrm_agent.InitComponent
+hrm_agent.HRM_MultiTaskAgent.traj_component_type = @TrajComp/hrm_agent.InitComponent
+hrm_agent.HRM_MultiTaskAgent.actor_component_type = @ActorComp/hrm_agent.InitComponent
+hrm_agent.HRM_MultiTaskAgent.critic_component_type = @CriticComp/hrm_agent.InitComponent
+hrm_agent.HRM_MultiTaskAgent.maximized_critics_component_type = @MaximizedCriticComp/hrm_agent.InitComponent
+hrm_agent.HRM_MultiTaskAgent.target_critic_component_type = @TargetCriticComp/hrm_agent.InitComponent
+hrm_agent.HRM_MultiTaskAgent.target_actor_component_type = @TargetActorComp/hrm_agent.InitComponent
+hrm_agent.HRM_MultiTaskAgent.popart_component_type = @PopartComp/hrm_agent.InitComponent
+hrm_agent.HRM_MultiTaskAgent.vae_prior_component_type = @VAE_PriorComp/hrm_agent.InitComponent
+hrm_agent.HRM_MultiTaskAgent.vae_value_estimator_component_type = @ValueEstimatorComp/hrm_agent.InitComponent
+
+CKPT_PATH="results/HRM-Gen-1-OpponentModeling/ckpts/policy_weights/policy_epoch_2.pt"
+
+
+# === Scoped Configuration ===
+TstepComp/hrm_agent.InitComponent.do_init_with_ckpt = True 
+TstepComp/hrm_agent.InitComponent.ckpt_path = "synthetic-rl-v2/ckpts/policy_weights/policy_epoch_40.pt"
+TstepComp/hrm_agent.InitComponent.component_name = "tstep_encoder" 
+TstepComp/hrm_agent.InitComponent.is_trainable = False 
+TstepComp/hrm_agent.InitComponent.from_hf = True     # where to load the ckpt from 
+
+TrajComp/hrm_agent.InitComponent.do_init_with_ckpt = False 
+TrajComp/hrm_agent.InitComponent.ckpt_path = %CKPT_PATH
+TrajComp/hrm_agent.InitComponent.component_name = "traj_encoder"
+TrajComp/hrm_agent.InitComponent.is_trainable = True 
+
+ActorComp/hrm_agent.InitComponent.do_init_with_ckpt = False 
+ActorComp/hrm_agent.InitComponent.ckpt_path = %CKPT_PATH
+ActorComp/hrm_agent.InitComponent.component_name = "actor"
+ActorComp/hrm_agent.InitComponent.is_trainable = True 
+
+CriticComp/hrm_agent.InitComponent.do_init_with_ckpt = False 
+CriticComp/hrm_agent.InitComponent.ckpt_path = %CKPT_PATH
+CriticComp/hrm_agent.InitComponent.component_name = "critics" 
+CriticComp/hrm_agent.InitComponent.is_trainable = True 
+
+MaximizedCriticComp/hrm_agent.InitComponent.do_init_with_ckpt = False 
+MaximizedCriticComp/hrm_agent.InitComponent.ckpt_path = %CKPT_PATH
+MaximizedCriticComp/hrm_agent.InitComponent.component_name = "maximized_critics" 
+MaximizedCriticComp/hrm_agent.InitComponent.is_trainable = True 
+
+TargetCriticComp/hrm_agent.InitComponent.do_init_with_ckpt = False 
+TargetCriticComp/hrm_agent.InitComponent.ckpt_path = %CKPT_PATH
+TargetCriticComp/hrm_agent.InitComponent.component_name = "target_critics"
+TargetCriticComp/hrm_agent.InitComponent.is_trainable = True 
+
+TargetActorComp/hrm_agent.InitComponent.do_init_with_ckpt = False 
+TargetActorComp/hrm_agent.InitComponent.ckpt_path = %CKPT_PATH
+TargetActorComp/hrm_agent.InitComponent.component_name = "target_actor" 
+TargetActorComp/hrm_agent.InitComponent.is_trainable = True 
+
+PopartComp/hrm_agent.InitComponent.do_init_with_ckpt = False 
+PopartComp/hrm_agent.InitComponent.ckpt_path = %CKPT_PATH
+PopartComp/hrm_agent.InitComponent.component_name = "popart" 
+PopartComp/hrm_agent.InitComponent.is_trainable = True 
+
+
+VAE_PriorComp/hrm_agent.InitComponent.do_init_with_ckpt = True 
+VAE_PriorComp/hrm_agent.InitComponent.ckpt_path = "results/VAE_Prior_Gen-1/ckpts/vae_prior_step_4400.pt" 
+VAE_PriorComp/hrm_agent.InitComponent.component_name = "" 
+VAE_PriorComp/hrm_agent.InitComponent.is_trainable = True 
+
+ValueEstimatorComp/hrm_agent.InitComponent.do_init_with_ckpt = False 
+ValueEstimatorComp/hrm_agent.InitComponent.ckpt_path = %CKPT_PATH
+ValueEstimatorComp/hrm_agent.InitComponent.component_name = "" 
+ValueEstimatorComp/hrm_agent.InitComponent.is_trainable = True 
+
+
+CustomExperiment.l2_coeff = 7e-5
+CustomExperiment.learning_rate = 1.5e-4
+CustomExperiment.grad_clip = 1.5
+CustomExperiment.critic_loss_weight = 10.
+CustomExperiment.lr_warmup_steps = 200
+# CustomExperiment.mixed_precision = "bf16"
+CustomExperiment.wandb_project= "Gen-1-Pokemon-Showdown-Challenge"
+CustomExperiment.wandb_entity= "sarvp2486-iit-roorkee"
+CustomExperiment.wandb_group_name= "HRM-integration as traj_encoder"
+
+# opponent modeling related params ==>
+CustomExperiment.cvae_kl_loss_weights = 0.01
+CustomExperiment.cvae_recons_loss_weights = 0.5
+CustomExperiment.selector_loss_weights = 0.1

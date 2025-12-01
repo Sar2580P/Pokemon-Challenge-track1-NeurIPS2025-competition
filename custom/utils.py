@@ -68,7 +68,10 @@ def get_modal_stuff(app_name:str="Modal training"):
         .add_local_dir(
             local_path="~/Pokemon-Challenge-track1/custom", remote_path="/root/custom"
         )
-        .add_local_file(local_path="~/Pokemon-Challenge-track1/environment.yml", remote_path="/root/environment.yml")        
+        .add_local_dir(
+            local_path="~/Pokemon-Challenge-track1/inference", remote_path="/root/inference"
+        )
+        .add_local_file(local_path="environment.yml", remote_path="/root/environment.yml")        
         
     )
 
@@ -80,10 +83,15 @@ def get_modal_stuff_flash_attn(app_name:str="Modal training"):
     from pathlib import Path
     packages=read_yaml('environment.yml')['dependencies'][-1]['pip']
     HOME_DIR = Path.home()/"Pokemon-Challenge-track1"
-
+    
+    cuda_version = "12.8.1"  # should be no greater than host CUDA version
+    flavor = "devel"  # includes full CUDA toolkit
+    operating_sys = "ubuntu24.04"
+    tag = f"{cuda_version}-{flavor}-{operating_sys}"
+    
     image = (
         modal.Image.from_registry(
-            f"nvidia/cuda:{cuda_tag}",
+            f"nvidia/cuda:{tag}",
             add_python="3.10"
         )
         .entrypoint([])
@@ -118,16 +126,7 @@ def get_modal_stuff_flash_attn(app_name:str="Modal training"):
         .run_commands("mkdir /root/metamon2/" , "git clone --recursive https://github.com/Sar2580P/metamon-personal.git /root/metamon2/")
         .run_commands( "mv /root/metamon2/* root")
         .run_commands("cd /root/ && pip install -e .")
-        
-        
-        .add_local_file(HOME_DIR/"entrypoint.sh", "/root/entrypoint.sh", copy=True)
-        .run_commands("chmod a+x /root/entrypoint.sh")
         .pip_install("PySocks")
-        
-        # 3. SET THE ENTRYPOINT TO RUN THE TAILSCALE SCRIPT FIRST
-        # This replaces the default startup command. Your Python function call 
-        # will be passed as arguments to this script.
-        .entrypoint(["/root/entrypoint.sh"])
         
         .env({"METAMON_WANDB_PROJECT": "PAC-dataset"})
         .env({"METAMON_WANDB_ENTITY": "PAC-dataset"})
@@ -283,11 +282,24 @@ def add_cli(parser):
         help="steps_per_epoch",
     )
     parser.add_argument(
+        "--min_rating",
+        type=int,
+        default=None,
+        help="min_elo_rating",
+    )
+    parser.add_argument(
+        "--max_rating",
+        type=int,
+        default=None,
+        help="max_elo_rating",
+    )
+    parser.add_argument(
         "--verbose",
         type=bool,
         default=True,
         help="verbose",
     )
+    
     
     
     parser.add_argument("--log", action="store_true", help="Log to wandb.")

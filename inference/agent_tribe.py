@@ -576,7 +576,7 @@ class InferenceTribeMTA(MultiTaskAgent):
         self.inference_entities=inference_entities
         self.policy_weights = None
         self.per_expert_G_t = None
-        self.eta_base=0.7
+        self.eta_base=7e-2
 
     def _select_action_from_probs(
         self,
@@ -742,7 +742,7 @@ class InferenceTribeMTA(MultiTaskAgent):
         hidden_state: Any = None, 
         ensembling_method: str = 'dynamic_advantage', # Options: 'entropy', 'mean', 'none', 'q_value'
         sampling_method: str = 'nucleus',   # Options: 'nucleus', 'standard'
-        nucleus_p: float = 0.9,
+        nucleus_p: float = 0.7,
         entropy_fallback_threshold: float = 1.5,
     ) -> Tuple[torch.Tensor, Any]:
         """
@@ -808,7 +808,7 @@ class InferenceTribeMTA(MultiTaskAgent):
         sample: bool = True,
         hidden_state: Any = None, 
         sampling_method: str = 'nucleus',   # Options: 'nucleus', 'standard'
-        nucleus_p: float = 0.7,
+        nucleus_p: float = 75,
         dones=None, 
     ) -> Tuple[torch.Tensor, Any]:
         
@@ -835,10 +835,10 @@ class InferenceTribeMTA(MultiTaskAgent):
         # --- 1. Define K (number of top policies to use) ---
         gamma_mask = torch.tensor(all_gammas, device=weights.device, dtype=weights.dtype)
         # 2. Create the boolean mask (True where gamma >= 0.1), shape: [G']
-        gamma_mask = (gamma_mask >= 0.1) 
+        gamma_mask = (gamma_mask >= 0.2) 
         # 3. Apply the mask to the weights. Broadcasting [B, G'] * [G']
-        weights = weights * gamma_mask
-        K = 4
+        weights = weights  
+        K = 2
         
         # 'weights' is your original policy_weights tensor of shape [B, G']
         
@@ -866,6 +866,7 @@ class InferenceTribeMTA(MultiTaskAgent):
 
         # # STEP-3: Action sampling from ensembled policy
         # ensemble_policy = torch.einsum('biga, bg -> bia', actions, weights)
+        print(f"POLICY WEIGHTS ==> {weights[0]} , gamma_mask= {gamma_mask}")
         print(f"AFTER: action distr: max: {torch.max(ensemble_policy[0], dim=-1)[0]} ||| min: {torch.min(ensemble_policy[0], dim=-1)[0]} \n\n\n")
         sampled_actions = self._select_action_from_probs(
             ensemble_policy,
@@ -896,8 +897,9 @@ class InferenceTribeMTA(MultiTaskAgent):
             popart_sigmas_.append(agent.popart.sigma)
             
         sigmas = torch.cat(popart_sigmas_, dim=0)    # [G', 1]
-        td_error = torch.cat(td_err_, dim=-1) # [B, L, G' ]
+        td_error = torch.cat(td_err_, dim=-1) # [B, L, G']
         print(f"TD ERROR ==> {td_error[0]}\n\n")
+        
         assert td_error.shape[1]==1, f"The seq len should be L=1, but found (L={td_error.shape[1]})"
         
         # We need to divide [B, L, G'] by [G', 1].
@@ -916,14 +918,14 @@ class InferenceTribeMTA(MultiTaskAgent):
         lr = self.get_hedge_lr(     # [B, G']
             loss=loss, 
             method=lr_method)  
-        lr= torch.clamp(lr, max=3)
+        lr = torch.clamp(lr, max=4)
         update_factor = torch.exp(-lr * loss.squeeze(1))
         # --- 4. Update the Weights ---
         # w_i(t+1) = w_i(t) * update_factor
         self.policy_weights = self.policy_weights.to(update_factor.device) * update_factor
         self.policy_weights = torch.clamp(self.policy_weights, max=5)
         print(f"policy-weights : min: {torch.mean(torch.min(self.policy_weights, dim=1)[0])} ||| max: {torch.mean(torch.max(self.policy_weights, dim=1)[0])}")
-    
+        print(f"lr = {lr[0]}")
     def get_hedge_lr(self,
                      loss: torch.Tensor,  
                      method='rms_style_per_policy_lr',

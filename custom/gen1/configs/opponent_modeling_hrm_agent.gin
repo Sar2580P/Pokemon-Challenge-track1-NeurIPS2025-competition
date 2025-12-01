@@ -1,0 +1,123 @@
+import amago.nets.actor_critic
+import amago.nets.traj_encoders
+import amago.experiment
+import custom.traj_encoder
+import custom.hrm_utils.layers
+import custom.hrm_agent
+
+CustomExperiment.agent_type = @hrm_agent.HRM_MultiTaskAgent
+CustomExperiment.tstep_encoder_type = @MetamonTstepEncoder
+CustomExperiment.traj_encoder_type = @traj_encoder.HRMTrajEncoder
+CustomExperiment.max_seq_len = 120   # keep it a multiple of chunk_len
+
+HRM_MultiTaskAgent.no_opponent_inference = False
+
+# actor
+HRM_MultiTaskAgent.actor_type = @MetamonMaskedActor
+HRM_MultiTaskAgent.pass_obs_keys_to_actor = ["illegal_actions"]
+MetamonMaskedActor.activation = "leaky_relu"
+MetamonMaskedActor.n_layers = 2
+MetamonMaskedActor.d_hidden = 512
+
+# critic
+MultiTaskAgent.critic_type = @actor_critic.NCriticsTwoHot
+actor_critic.NCriticsTwoHot.activation = "leaky_relu"
+actor_critic.NCriticsTwoHot.n_layers = 2
+actor_critic.NCriticsTwoHot.d_hidden = 512
+HRM_MultiTaskAgent.popart = True
+HRM_MultiTaskAgent.num_critics = 6
+actor_critic.NCriticsTwoHot.output_bins = 96
+actor_critic.NCriticsTwoHot.min_return = -1100
+actor_critic.NCriticsTwoHot.max_return = 1100
+actor_critic.NCriticsTwoHot.use_symlog = False
+
+# local metamon architectures
+SCRATCH_TOKENS=11
+MetamonTstepEncoder.extra_emb_dim = 18
+MetamonTstepEncoder.d_model = 160
+MetamonTstepEncoder.n_layers = 5
+MetamonTstepEncoder.n_heads = 8
+MetamonTstepEncoder.scratch_tokens = %SCRATCH_TOKENS
+MetamonTstepEncoder.numerical_tokens = 6
+MetamonTstepEncoder.token_mask_aug = True
+MetamonTstepEncoder.dropout = .05
+
+
+# vae prior
+OPPONENT_LATENT_DIM=128
+HRM_MultiTaskAgent.vae_prior_type = @traj_encoder.VAE_Prior
+VAE_Prior.num_tokens= %SCRATCH_TOKENS
+VAE_Prior.token_dim=160
+VAE_Prior.latent_dim= %OPPONENT_LATENT_DIM
+VAE_Prior.kernel_size= 3
+VAE_Prior.channel_dims= [64, 96, 128, 256]
+VAE_Prior.learning_rate= 1e-5
+VAE_Prior.beta  = 1.0
+VAE_Prior.gradient_accumulation_steps  = 3
+
+
+# vae value estimator (for subgoal selector)
+HRM_MultiTaskAgent.vae_value_estimator_type = @layers.MultiGammaValueEstimatorV3
+MultiGammaValueEstimatorV3.subgoal_dim=  %OPPONENT_LATENT_DIM
+MultiGammaValueEstimatorV3.sequence_input_shape=[%SCRATCH_TOKENS, 160]
+MultiGammaValueEstimatorV3.num_gammas=7
+MultiGammaValueEstimatorV3.hidden_dim=196
+MultiGammaValueEstimatorV3.num_blocks=3
+MultiGammaValueEstimatorV3.dropout_rate=0.12
+MultiGammaValueEstimatorV3.conv_channels=[32, 64, 96, 128]
+
+
+# amago transformer
+Traj_d_model= 256
+REASONING_TOKENS= 9
+traj_encoder.HRMTrajEncoder.d_model = %Traj_d_model
+traj_encoder.HRMTrajEncoder.reasoning_tokens = %REASONING_TOKENS
+traj_encoder.HRMTrajEncoder.H_cycles = 4
+traj_encoder.HRMTrajEncoder.L_cycles = 5
+traj_encoder.HRMTrajEncoder.H_layers = 4
+traj_encoder.HRMTrajEncoder.L_layers = 4
+traj_encoder.HRMTrajEncoder.H_block_type = @H_Block_Config/traj_encoder.HierarchicalReasoningModel_ACTV1Block
+traj_encoder.HRMTrajEncoder.L_block_type = @L_Block_Config/traj_encoder.HierarchicalReasoningModel_ACTV1Block
+traj_encoder.HRMTrajEncoder.M_block_type = @traj_encoder.Mixer
+traj_encoder.HRMTrajEncoder.pos_encoding_type = @layers.RotaryEmbedding
+traj_encoder.HRMTrajEncoder.chunk_atten_type = @layers.ChunkRepresentativeAttention
+traj_encoder.HRMTrajEncoder.CVAE_type = @traj_encoder.CVAE
+traj_encoder.HRMTrajEncoder.chunk_len = 5
+
+# === Scoped Configuration for H_block ===
+H_Block_Config/traj_encoder.HierarchicalReasoningModel_ACTV1Block.hidden_size = %Traj_d_model
+H_Block_Config/traj_encoder.HierarchicalReasoningModel_ACTV1Block.num_heads = 8
+H_Block_Config/traj_encoder.HierarchicalReasoningModel_ACTV1Block.expansion = 2
+
+# === Scoped Configuration for L_block ===
+# I'm using different values here just to show they can be independent
+L_Block_Config/traj_encoder.HierarchicalReasoningModel_ACTV1Block.hidden_size = %Traj_d_model
+L_Block_Config/traj_encoder.HierarchicalReasoningModel_ACTV1Block.num_heads = 8
+L_Block_Config/traj_encoder.HierarchicalReasoningModel_ACTV1Block.expansion = 2
+
+# Mixer module config
+Mixer.num_layers = 4
+Mixer.dim_zH = %Traj_d_model
+Mixer.dim_x = %Traj_d_model
+Mixer.n_heads = 8
+Mixer.ffn_expansion = 2
+Mixer.dropout = 0.2
+
+RotaryEmbedding.hidden_dim= %Traj_d_model
+RotaryEmbedding.num_heads=8
+RotaryEmbedding.max_position_embeddings=30
+RotaryEmbedding.base=1000.0
+
+
+ChunkRepresentativeAttention.num_heads = 4
+ChunkRepresentativeAttention.dropout = 0.1
+ChunkRepresentativeAttention.num_layers = 3
+ChunkRepresentativeAttention.channel_dims=[32, 64, 128, %Traj_d_model]
+
+
+
+CVAE.num_tokens= 20                      #(SCRATCH_TOKENS + REASONING_TOKENS)
+CVAE.token_dim=256
+CVAE.latent_dim= %OPPONENT_LATENT_DIM
+CVAE.channel_dims= [64, 96, 128, 256]
+CVAE.kernel_size= 3
